@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Creator AI Dashboard — OpenAI + Connectors Demo</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="revenue-box">
+          <div class="label">Total Revenue (This Month)</div>
+          <div class="amount" id="totalRevenue">£3,842.70</div>
+          <button class="btn small" id="diveBtn">Dive Deeper →</button>
+        </div>
+        <div class="edit-box">
+          <button class="btn primary" id="editBtn">✂️ Ask to Make an Edit</button>
+          <button class="btn ghost close-x" id="closeEdit">✕</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="layout">
+      <aside class="ai-panel">
+        <h2>AI Strategy Assistant</h2>
+        <p class="muted">Analyses your channels and suggests the best videos to make next.</p>
+
+        <div class="ai-actions">
+          <button class="chip" id="ideaBtn">Generate Ideas</button>
+          <button class="chip" id="scriptBtn">Write Script</button>
+          <button class="chip" id="analyzeBtn">Analyze Channel</button>
+          <button class="chip" id="predictBtn">Predict Revenue</button>
+        </div>
+
+        <div class="ai-output" id="aiOutput" aria-live="polite"></div>
+
+        <div class="ai-footer">
+          <label>Ask the assistant:</label>
+          <div class="ai-input-row">
+            <input id="aiQuestion" placeholder="e.g. How can I increase Shorts RPM?" />
+            <button class="btn" id="aiAskBtn">Ask</button>
+          </div>
+          <div id="aiResponse" class="ai-response"></div>
+        </div>
+
+        <hr/>
+        <div>
+          <h4>Connect platforms</h4>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <a class="chip" href="/connect/youtube" target="_blank">Connect YouTube</a>
+            <a class="chip" href="/connect/tiktok" target="_blank">Connect TikTok</a>
+            <a class="chip" href="/connect/instagram" target="_blank">Connect Instagram</a>
+            <a class="chip" href="/connect/stripe" target="_blank">Connect Stripe</a>
+            <a class="chip" href="/connect/paypal" target="_blank">Connect PayPal</a>
+          </div>
+        </div>
+
+      </aside>
+
+      <section class="main">
+        <div class="cards">
+          <div class="card perf">
+            <h3>Performance Snapshot</h3>
+            <div class="grid-3">
+              <div>
+                <div class="small muted">Views this week</div>
+                <div class="big" id="views">1,240,300</div>
+              </div>
+              <div>
+                <div class="small muted">Watch time (hrs)</div>
+                <div class="big" id="watch">12,430</div>
+              </div>
+              <div>
+                <div class="small muted">Avg view duration</div>
+                <div class="big" id="avgdur">4m 2s</div>
+              </div>
+            </div>
+            <canvas id="trendChart" height="80"></canvas>
+          </div>
+
+          <div class="card quick">
+            <h4>Quick Actions</h4>
+            <div class="quick-actions">
+              <button class="chip" onclick="mockAutoEdit()">Auto-Edit Top Video</button>
+              <button class="chip" onclick="openDive()">Revenue Breakdown</button>
+              <button class="chip" onclick="mockExport()">Export CSV</button>
+            </div>
+            <div class="small muted">Most active: YouTube · RPM £7.3</div>
+          </div>
+        </div>
+
+        <div class="channels card">
+          <h4>Followers & Channels</h4>
+          <div class="channel-grid">
+            <div class="channel-card">
+              <div class="ch-name">YouTube</div>
+              <div class="ch-count">1,880,300</div>
+              <div class="ch-meta">Views this week: 900k · +9.1%</div>
+            </div>
+            <div class="channel-card">
+              <div class="ch-name">TikTok</div>
+              <div class="ch-count">920,450</div>
+              <div class="ch-meta">Views this week: 240k · +7.8%</div>
+            </div>
+            <div class="channel-card">
+              <div class="ch-name">Instagram</div>
+              <div class="ch-count">210,300</div>
+              <div class="ch-meta">Impressions: 78k · +3.2%</div>
+            </div>
+            <div class="channel-card">
+              <div class="ch-name">Twitch</div>
+              <div class="ch-count">130,950</div>
+              <div class="ch-meta">Followers gained: 3.1k</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="rightcol">
+        <div class="card sub">
+          <h4>Subscription</h4>
+          <div class="small muted">Plan: Free</div>
+          <div class="price">£0 <span class="muted">/ month</span></div>
+          <button class="btn primary" id="upgradeBtn">Upgrade to £5/mo</button>
+          <div class="small muted" style="margin-top:8px;">Includes unlimited edits & AI messages</div>
+        </div>
+
+        <div class="card analytics">
+          <h4>Earnings (7d)</h4>
+          <canvas id="earnChart" height="120"></canvas>
+        </div>
+
+        <div class="card followers">
+          <h4>Quick Stats</h4>
+          <div class="stat-row"><div>Total followers</div><div class="big">3,142,000</div></div>
+          <div class="stat-row"><div>Active platforms</div><div class="big">4</div></div>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-inner">
+      <button class="modal-close" id="modalClose">✕</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+<script src="app.js"></script>
+</body>
+</html>
