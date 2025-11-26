@@ -8,6 +8,24 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+<body>
+
+<div class="top-bar">
+  <button class="edit-video-btn" onclick="editVideo()">🎬 Edit Video</button>
+
+  <div class="profile-wrapper">
+    <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png"
+         class="profile-icon"
+         onclick="toggleProfileMenu()" />
+
+    <div class="profile-menu hidden" id="profileMenu">
+      <div class="menu-item" onclick="openSettings()">⚙ Settings</div>
+      <div class="menu-item" onclick="openHelp()">❓ Help</div>
+      <div class="menu-item" onclick="addAccount()">➕ Add Account</div>
+      <div class="menu-item logout" onclick="logout()">🚪 Log Out</div>
+    </div>
+  </div>
+</div>
 
 
 <div class="login-container" id="loginBox">
