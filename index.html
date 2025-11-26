@@ -8,6 +8,25 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+  <div class="ai-edit-box" id="editBtn">
+  <h3>🎬 AI Video Editor</h3>
+  <p>Drop a video → Get instant smart edits, effects & captions</p>
+  <button class="ai-edit-action">Create Edit</button>
+</div>
+
+<div class="login-container" id="loginBox">
+  <h2>Login</h2>
+  <input type="text" id="username" placeholder="Username">
+  <input type="password" id="password" placeholder="Password">
+  <button onclick="login()">Login</button>
+</div>
+
+<div class="account-panel hidden" id="accountPanel">
+  <h3>Welcome, <span id="userDisplay"></span></h3>
+  <button onclick="openSettings()">⚙ Settings</button>
+  <button onclick="logout()">Log Out</button>
+</div>
+
   <div class="app">
     <header class="topbar">
       <div class="topbar-inner">
