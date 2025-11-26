@@ -40,30 +40,3 @@ document.getElementById("editBtn").onclick = () => {
   alert("AI Edit Tool coming next – this will upload your video!");
 };
 
-function login() {
-  const user = document.getElementById("username").value;
-  if (!user) return alert("Enter a username");
-
-  localStorage.setItem("user", user);
-  document.getElementById("loginBox").classList.add("hidden");
-  document.getElementById("accountPanel").classList.remove("hidden");
-  document.getElementById("userDisplay").innerText = user;
-}
-
-function logout() {
-  localStorage.removeItem("user");
-  location.reload();
-}
-
-function openSettings() {
-  alert("Settings panel coming next: billing, help, social links.");
-}
-
-window.onload = () => {
-  const user = localStorage.getItem("user");
-  if (user) {
-    document.getElementById("loginBox").classList.add("hidden");
-    document.getElementById("accountPanel").classList.remove("hidden");
-    document.getElementById("userDisplay").innerText = user;
-  }
-};
