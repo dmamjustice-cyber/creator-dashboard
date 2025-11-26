@@ -40,3 +40,29 @@ document.getElementById("editBtn").onclick = () => {
   alert("AI Edit Tool coming next – this will upload your video!");
 };
 
+function toggleProfileMenu() {
+  document.getElementById("profileMenu").classList.toggle("hidden");
+}
+
+function editVideo() {
+  alert("Upload your video – AI editing is coming next.");
+}
+
+function openSettings() {
+  alert("Settings page coming next.");
+}
+
+function openHelp() {
+  alert("Help & support coming next.");
+}
+
+function addAccount() {
+  const platform = prompt("Add account: YouTube, TikTok, or Instagram?");
+  if (platform) {
+    alert(platform + " account connected (mock).");
+  }
+}
+
+function logout() {
+  alert("Logged out (mock).");
+}
