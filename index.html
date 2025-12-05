@@ -1,25 +1,108 @@
-<function toggleProfileMenu() {
-  document.getElementById("profileMenu").classList.toggle("hidden");
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Creator Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
-function editVideo() {
-  alert("Upload video – AI editing coming next.");
-}
+<!-- Sidebar -->
+<div class="sidebar">
+  <h2 class="brand">AIVideoHub</h2>
+  <div class="nav-item active">Dashboard</div>
+  <div class="nav-item">AI Create</div>
+  <div class="nav-item">AI Editor</div>
+  <div class="nav-item">My Videos</div>
+  <div class="nav-item">Revenue</div>
+  <div class="nav-item">Analytics</div>
+  <div class="nav-item">AI Optimize</div>
+  <div class="nav-item">Account</div>
+</div>
 
-function openSettings() {
-  alert("Settings coming soon.");
-}
+<!-- Main -->
+<div class="main">
 
-function openHelp() {
-  alert("Help & support coming soon.");
-}
+  <!-- Top Bar -->
+  <div class="topbar">
+    <div>
+      <h1>Welcome back, John!</h1>
+      <p class="muted">Here’s your revenue and performance overview</p>
+    </div>
+    <button class="upload-btn">+ Create & Upload Video</button>
+  </div>
 
-function addAccount() {
-  const platform = prompt("Add account: YouTube, TikTok, or Instagram?");
-  if (platform) alert(platform + " connected (mock).");
-}
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat green">
+      <p>Total Revenue</p>
+      <h2>$12,847</h2>
+      <button>Dive Deeper</button>
+    </div>
+    <div class="stat">
+      <p>Total Views</p>
+      <h2>2.4M</h2>
+      <button>Dive Deeper</button>
+    </div>
+    <div class="stat">
+      <p>RPM</p>
+      <h2>$5.35</h2>
+      <button>Dive Deeper</button>
+    </div>
+    <div class="stat">
+      <p>Uploaded Videos</p>
+      <h2>156</h2>
+      <button>Dive Deeper</button>
+    </div>
+  </div>
 
-function logout() {
-  alert("Logged out (mock).");
-}
+  <!-- Analytics Panels -->
+  <div class="panels">
+    <div class="panel">Revenue Analytics (chart placeholder)</div>
+    <div class="panel">Revenue by Platform (chart placeholder)</div>
+  </div>
 
+  <!-- Top Videos -->
+  <div class="panel table">
+    <h3>Top Earning Videos</h3>
+    <table>
+      <tr>
+        <th>Video</th>
+        <th>Views</th>
+        <th>Revenue</th>
+        <th>Status</th>
+      </tr>
+      <tr>
+        <td>AI Tools Getting Started</td>
+        <td>125K</td>
+        <td class="green-text">$792</td>
+        <td class="status">Active</td>
+      </tr>
+      <tr>
+        <td>Marketing AI Strategy</td>
+        <td>234K</td>
+        <td class="green-text">$1,521</td>
+        <td class="status">Active</td>
+      </tr>
+      <tr>
+        <td>Top 10 AI Video Tips</td>
+        <td>98K</td>
+        <td class="green-text">$621</td>
+        <td class="status">Active</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Bottom Platform Cards -->
+  <div class="platforms">
+    <div class="platform">YouTube<br><strong>$8,450</strong></div>
+    <div class="platform">TikTok<br><strong>$2,890</strong></div>
+    <div class="platform">Instagram<br><strong>$1,320</strong></div>
+    <div class="platform">Facebook<br><strong>$187</strong></div>
+  </div>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
