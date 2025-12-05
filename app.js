@@ -1,15 +1,13 @@
 function showPage(pageId, el) {
   const pages = document.querySelectorAll(".page");
-  pages.forEach(page => page.classList.add("hidden"));
+  pages.forEach(p => p.classList.add("hidden"));
 
-  document.getElementById(pageId).classList.remove("hidden");
+  const page = document.getElementById(pageId);
+  if (page) page.classList.remove("hidden");
 
-  const navItems = document.querySelectorAll(".nav-item");
-  navItems.forEach(item => item.classList.remove("active"));
-
-  el.classList.add("active");
+  const nav = document.querySelectorAll(".nav-item");
+  nav.forEach(i => i.classList.remove("active"));
+  if (el) el.classList.add("active");
 }
 
-console.log("All pages are now live.");
-
-
+console.log("Navigation ready.");
