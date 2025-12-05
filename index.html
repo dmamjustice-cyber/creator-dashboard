@@ -1,69 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Creator Dashboard</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
+<function toggleProfileMenu() {
+  document.getElementById("profileMenu").classList.toggle("hidden");
+}
 
-  <!-- Top Bar -->
-  <div class="topbar">
-    <div class="logo">CreatorAI</div>
+function editVideo() {
+  alert("Upload video – AI editing coming next.");
+}
 
-    <div class="top-actions">
-      <button class="edit-btn" onclick="editVideo()">🎬 Edit Video</button>
+function openSettings() {
+  alert("Settings coming soon.");
+}
 
-      <div class="profile-wrapper">
-        <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png"
-             class="profile-icon"
-             onclick="toggleProfileMenu()" />
+function openHelp() {
+  alert("Help & support coming soon.");
+}
 
-        <div class="profile-menu hidden" id="profileMenu">
-          <div onclick="openSettings()">⚙ Settings</div>
-          <div onclick="openHelp()">❓ Help</div>
-          <div onclick="addAccount()">➕ Add Account</div>
-          <div class="logout" onclick="logout()">🚪 Log Out</div>
-        </div>
-      </div>
-    </div>
-  </div>
+function addAccount() {
+  const platform = prompt("Add account: YouTube, TikTok, or Instagram?");
+  if (platform) alert(platform + " connected (mock).");
+}
 
-  <!-- Side Bar -->
-  <div class="sidebar">
-    <div class="side-item active">Dashboard</div>
-    <div class="side-item">Analytics</div>
-    <div class="side-item">AI Tools</div>
-    <div class="side-item">Videos</div>
-    <div class="side-item">Revenue</div>
-  </div>
-
-  <!-- Main Content -->
-  <div class="main">
-
-    <div class="cards">
-      <div class="card">
-        <h3>Revenue</h3>
-        <p>£0.00</p>
-      </div>
-      <div class="card">
-        <h3>Followers</h3>
-        <p>0</p>
-      </div>
-      <div class="card">
-        <h3>Views</h3>
-        <p>0</p>
-      </div>
-    </div>
-
-    <div class="chart-box">
-      <h3>Performance Overview</h3>
-      <div class="fake-chart">[ Chart UI Placeholder ]</div>
-    </div>
-
-  </div>
-
-  <script src="app.js"></script>
-</body>
-</html>
+function logout() {
+  alert("Logged out (mock).");
+}
 
