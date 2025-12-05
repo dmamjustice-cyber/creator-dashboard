@@ -10,20 +10,19 @@
 <!-- Sidebar -->
 <div class="sidebar">
   <h2 class="brand">AIVideoHub</h2>
-  <div class="nav-item active" onclick="showPage('dashboard')">Dashboard</div>
-  <div class="nav-item" onclick="showPage('aicreate')">AI Create</div>
-  <div class="nav-item" onclick="showPage('aieditor')">AI Editor</div>
-  <div class="nav-item" onclick="showPage('myvideos')">My Videos</div>
-  <div class="nav-item" onclick="showPage('revenue')">Revenue</div>
-  <div class="nav-item" onclick="showPage('analytics')">Analytics</div>
-  <div class="nav-item" onclick="showPage('optimize')">AI Optimize</div>
-  <div class="nav-item" onclick="showPage('subscription')">Subscription</div>
-  <div class="nav-item" onclick="showPage('account')">Account</div>
+  <div class="nav-item active" onclick="showPage('dashboard', this)">Dashboard</div>
+  <div class="nav-item" onclick="showPage('aicreate', this)">AI Create</div>
+  <div class="nav-item" onclick="showPage('aieditor', this)">AI Editor</div>
+  <div class="nav-item" onclick="showPage('myvideos', this)">My Videos</div>
+  <div class="nav-item" onclick="showPage('revenue', this)">Revenue</div>
+  <div class="nav-item" onclick="showPage('analytics', this)">Analytics</div>
+  <div class="nav-item" onclick="showPage('optimize', this)">AI Optimize</div>
+  <div class="nav-item" onclick="showPage('subscription', this)">Subscription</div>
+  <div class="nav-item" onclick="showPage('account', this)">Account</div>
 </div>
 
-<!-- ================= DASHBOARD PAGE ================= -->
+<!-- ================= DASHBOARD ================= -->
 <div class="main page" id="dashboard">
-
   <div class="topbar">
     <div>
       <h1>Welcome back, John!</h1>
@@ -32,83 +31,73 @@
     <button class="upload-btn">+ Create & Upload Video</button>
   </div>
 
-  <!-- ✅ FIXED STATS (NOW INCLUDES SUBS & FOLLOWING) -->
   <div class="stats">
     <div class="stat green">
       <p>Total Revenue</p>
       <h2>$12,847</h2>
-      <button>Dive Deeper</button>
     </div>
 
     <div class="stat">
       <p>Total Views</p>
       <h2>2.4M</h2>
-      <button>Dive Deeper</button>
+    </div>
+
+    <!-- ✅ FIXED: ALL FOLLOWERS COMBINED -->
+    <div class="stat">
+      <p>Total Followers</p>
+      <h2>312,450</h2>
     </div>
 
     <div class="stat">
-      <p>Subscribers</p>
-      <h2>184,230</h2>
-      <button>Dive Deeper</button>
+      <p>Uploaded Videos</p>
+      <h2>156</h2>
     </div>
-
-    <div class="stat">
-      <p>Following</p>
-      <h2>1,284</h2>
-      <button>Dive Deeper</button>
-    </div>
-  </div>
-
-  <div class="panels">
-    <div class="panel">Revenue Analytics (chart placeholder)</div>
-    <div class="panel">Revenue by Platform (chart placeholder)</div>
-  </div>
-
-  <div class="panel table">
-    <h3>Top Earning Videos</h3>
-    <table>
-      <tr>
-        <th>Video</th>
-        <th>Views</th>
-        <th>Revenue</th>
-        <th>Status</th>
-      </tr>
-      <tr>
-        <td>AI Tools Getting Started</td>
-        <td>125K</td>
-        <td class="green-text">$792</td>
-        <td class="status">Active</td>
-      </tr>
-      <tr>
-        <td>Marketing AI Strategy</td>
-        <td>234K</td>
-        <td class="green-text">$1,521</td>
-        <td class="status">Active</td>
-      </tr>
-      <tr>
-        <td>Top 10 AI Video Tips</td>
-        <td>98K</td>
-        <td class="green-text">$621</td>
-        <td class="status">Active</td>
-      </tr>
-    </table>
-  </div>
-
-  <div class="platforms">
-    <div class="platform">YouTube<br><strong>$8,450</strong></div>
-    <div class="platform">TikTok<br><strong>$2,890</strong></div>
-    <div class="platform">Instagram<br><strong>$1,320</strong></div>
-    <div class="platform">Facebook<br><strong>$187</strong></div>
   </div>
 </div>
 
-<!-- ================= SUBSCRIPTION PAGE ================= -->
-<div class="main page hidden" id="subscription">
+<!-- ================= AI CREATE ================= -->
+<div class="main page hidden" id="aicreate">
+  <h2>AI Create</h2>
+  <p>Create full videos using AI from prompts.</p>
+  <div class="panel">AI Video Generator Coming Soon…</div>
+</div>
 
+<!-- ================= AI EDITOR ================= -->
+<div class="main page hidden" id="aieditor">
+  <h2>AI Editor</h2>
+  <p>Edit uploaded videos using AI tools.</p>
+  <div class="panel">Upload video to auto-edit…</div>
+</div>
+
+<!-- ================= MY VIDEOS ================= -->
+<div class="main page hidden" id="myvideos">
+  <h2>My Videos</h2>
+  <div class="panel">Your uploaded videos will appear here.</div>
+</div>
+
+<!-- ================= REVENUE ================= -->
+<div class="main page hidden" id="revenue">
+  <h2>Your Revenue</h2>
+  <div class="panel">Revenue breakdown by video & platform.</div>
+</div>
+
+<!-- ================= ANALYTICS ================= -->
+<div class="main page hidden" id="analytics">
+  <h2>Analytics</h2>
+  <div class="panel">Engagement & growth analytics.</div>
+</div>
+
+<!-- ================= AI OPTIMIZE ================= -->
+<div class="main page hidden" id="optimize">
+  <h2>AI Optimize</h2>
+  <div class="panel">AI suggestions to improve your channel.</div>
+</div>
+
+<!-- ================= SUBSCRIPTION ================= -->
+<div class="main page hidden" id="subscription">
   <h2>Choose Your Plan</h2>
 
   <div class="plans">
-
     <div class="plan">
       <h3>Free</h3>
       <h1>£0</h1>
@@ -127,7 +116,7 @@
       <ul>
         <li>✅ 10 edits per day</li>
         <li>✅ 10 AI video uploads daily</li>
-        <li>✅ Up to 20 channels</li>
+        <li>✅ 20 channels max</li>
         <li>✅ 10 AI assistant questions</li>
       </ul>
       <button>Upgrade</button>
@@ -144,11 +133,17 @@
       </ul>
       <button>Go Pro</button>
     </div>
+  </div>
+</div>
 
+<!-- ================= ACCOUNT ================= -->
+<div class="main page hidden" id="account">
+  <h2>Account Settings</h2>
+  <div class="panel">
+    Manage your profile, connected platforms, and security here.
   </div>
 </div>
 
 <script src="app.js"></script>
 </body>
 </html>
-
