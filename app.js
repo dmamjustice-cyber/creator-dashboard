@@ -1,4 +1,4 @@
-function showPage(pageId) {
+function showPage(pageId, el) {
   const pages = document.querySelectorAll(".page");
   pages.forEach(page => page.classList.add("hidden"));
 
@@ -7,9 +7,9 @@ function showPage(pageId) {
   const navItems = document.querySelectorAll(".nav-item");
   navItems.forEach(item => item.classList.remove("active"));
 
-  event.target.classList.add("active");
+  el.classList.add("active");
 }
 
-console.log("All sidebar navigation is now active.");
+console.log("All pages are now live.");
 
 
