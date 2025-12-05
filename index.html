@@ -10,22 +10,20 @@
 <!-- Sidebar -->
 <div class="sidebar">
   <h2 class="brand">AIVideoHub</h2>
-  <div class="nav-item active" onclick="showDashboard()">Dashboard</div>
-  <div class="nav-item">AI Create</div>
-  <div class="nav-item">AI Editor</div>
-  <div class="nav-item">My Videos</div>
-  <div class="nav-item">Revenue</div>
-  <div class="nav-item">Analytics</div>
-  <div class="nav-item">AI Optimize</div>
-  <div class="nav-item" onclick="showSubscription()">Subscription</div>
-  <div class="nav-item">Account</div>
+  <div class="nav-item active" onclick="showPage('dashboard')">Dashboard</div>
+  <div class="nav-item" onclick="showPage('aicreate')">AI Create</div>
+  <div class="nav-item" onclick="showPage('aieditor')">AI Editor</div>
+  <div class="nav-item" onclick="showPage('myvideos')">My Videos</div>
+  <div class="nav-item" onclick="showPage('revenue')">Revenue</div>
+  <div class="nav-item" onclick="showPage('analytics')">Analytics</div>
+  <div class="nav-item" onclick="showPage('optimize')">AI Optimize</div>
+  <div class="nav-item" onclick="showPage('subscription')">Subscription</div>
+  <div class="nav-item" onclick="showPage('account')">Account</div>
 </div>
 
+<!-- ================= DASHBOARD PAGE ================= -->
+<div class="main page" id="dashboard">
 
-<!-- Main -->
-<div class="main">
-
-  <!-- Top Bar -->
   <div class="topbar">
     <div>
       <h1>Welcome back, John!</h1>
@@ -34,40 +32,38 @@
     <button class="upload-btn">+ Create & Upload Video</button>
   </div>
 
-  <!-- Stats -->
+  <!-- ✅ FIXED STATS (NOW INCLUDES SUBS & FOLLOWING) -->
   <div class="stats">
-  <div class="stat green">
-    <p>Total Revenue</p>
-    <h2>$12,847</h2>
-    <button>Dive Deeper</button>
+    <div class="stat green">
+      <p>Total Revenue</p>
+      <h2>$12,847</h2>
+      <button>Dive Deeper</button>
+    </div>
+
+    <div class="stat">
+      <p>Total Views</p>
+      <h2>2.4M</h2>
+      <button>Dive Deeper</button>
+    </div>
+
+    <div class="stat">
+      <p>Subscribers</p>
+      <h2>184,230</h2>
+      <button>Dive Deeper</button>
+    </div>
+
+    <div class="stat">
+      <p>Following</p>
+      <h2>1,284</h2>
+      <button>Dive Deeper</button>
+    </div>
   </div>
 
-  <div class="stat">
-    <p>Total Views</p>
-    <h2>2.4M</h2>
-    <button>Dive Deeper</button>
-  </div>
-
-  <div class="stat">
-    <p>Subscribers</p>
-    <h2>184,230</h2>
-    <button>Dive Deeper</button>
-  </div>
-
-  <div class="stat">
-    <p>Following</p>
-    <h2>1,284</h2>
-    <button>Dive Deeper</button>
-  </div>
-</div>
-
-  <!-- Analytics Panels -->
   <div class="panels">
     <div class="panel">Revenue Analytics (chart placeholder)</div>
     <div class="panel">Revenue by Platform (chart placeholder)</div>
   </div>
 
-  <!-- Top Videos -->
   <div class="panel table">
     <h3>Top Earning Videos</h3>
     <table>
@@ -98,23 +94,21 @@
     </table>
   </div>
 
-  <!-- Bottom Platform Cards -->
   <div class="platforms">
     <div class="platform">YouTube<br><strong>$8,450</strong></div>
     <div class="platform">TikTok<br><strong>$2,890</strong></div>
     <div class="platform">Instagram<br><strong>$1,320</strong></div>
     <div class="platform">Facebook<br><strong>$187</strong></div>
   </div>
-
 </div>
-<!-- Subscription Page -->
-<div class="subscription hidden" id="subscriptionPage">
+
+<!-- ================= SUBSCRIPTION PAGE ================= -->
+<div class="main page hidden" id="subscription">
 
   <h2>Choose Your Plan</h2>
 
   <div class="plans">
 
-    <!-- FREE PLAN -->
     <div class="plan">
       <h3>Free</h3>
       <h1>£0</h1>
@@ -127,7 +121,6 @@
       <button>Current Plan</button>
     </div>
 
-    <!-- £5 PLAN -->
     <div class="plan popular">
       <h3>Creator</h3>
       <h1>£5 / month</h1>
@@ -140,7 +133,6 @@
       <button>Upgrade</button>
     </div>
 
-    <!-- £15 PLAN -->
     <div class="plan premium">
       <h3>Pro</h3>
       <h1>£15 / month</h1>
@@ -159,3 +151,4 @@
 <script src="app.js"></script>
 </body>
 </html>
+
