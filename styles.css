@@ -134,6 +134,68 @@ th, td {
 }
 
 .platform {
+  /* Subscription Page */
+.subscription {
+  padding: 40px;
+  animation: fadeIn 0.3s ease;
+}
+
+.plans {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 30px;
+}
+
+.plan {
+  background: #020617;
+  padding: 24px;
+  border-radius: 16px;
+  text-align: center;
+  border: 2px solid #1e293b;
+}
+
+.plan h1 {
+  margin: 16px 0;
+}
+
+.plan ul {
+  list-style: none;
+  margin: 20px 0;
+  text-align: left;
+}
+
+.plan ul li {
+  margin-bottom: 10px;
+}
+
+.plan button {
+  margin-top: 16px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  background: #7c3aed;
+  color: white;
+  cursor: pointer;
+}
+
+.plan.popular {
+  border: 2px solid #22c55e;
+}
+
+.plan.premium {
+  border: 2px solid gold;
+}
+
+.hidden {
+  display: none;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
   background: #020617;
   padding: 16px;
   border-radius: 14px;
