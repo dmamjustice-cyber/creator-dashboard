@@ -21,6 +21,10 @@ body {
 .brand {
   margin-bottom: 30px;
 }
+.hidden {
+  display: none !important;
+}
+
 
 .nav-item {
   padding: 12px;
