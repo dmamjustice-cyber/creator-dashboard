@@ -33,6 +33,9 @@ function openLanding() {
    LOGIN SYSTEM
 ====================== */
 function login() {
+   document.getElementById("userEmail").textContent = email;
+document.getElementById("topUser").textContent = email;
+
   const email = document.getElementById("email").value;
   if (!email) {
     alert("Enter an email");
