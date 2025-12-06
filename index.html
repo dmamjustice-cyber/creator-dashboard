@@ -48,10 +48,44 @@
   </div>
 
   <!-- DASHBOARD -->
-  <div class="main page" id="dashboard">
-    <h1>Dashboard</h1>
-    <canvas id="revenueChart"></canvas>
+ <div class="main page" id="dashboard">
+
+  <h1>Welcome back!</h1>
+  <p class="muted">Here's your revenue and performance overview</p>
+
+  <div class="stats">
+    <div class="stat green">
+      <h3>$12,847</h3>
+      <p>Total Revenue</p>
+    </div>
+    <div class="stat">
+      <h3>2.4M</h3>
+      <p>Total Views</p>
+    </div>
+    <div class="stat">
+      <h3>$5.35</h3>
+      <p>RPM</p>
+    </div>
+    <div class="stat">
+      <h3>156</h3>
+      <p>Videos</p>
+    </div>
   </div>
+
+  <div class="panels">
+    <div class="panel">
+      <h3>Revenue Analytics</h3>
+      <canvas id="revenueChart"></canvas>
+    </div>
+
+    <div class="panel">
+      <h3>Revenue by Platform</h3>
+      <canvas id="viewsChart"></canvas>
+    </div>
+  </div>
+
+</div>
+
 
   <!-- AI ASSISTANT (B) -->
   <div class="main page hidden" id="assistant">
