@@ -305,4 +305,12 @@ th, td {
   gap: 24px;
   flex-wrap: wrap;
 }
+.user-badge {
+  font-weight: bold;
+  font-size: 14px;
+  background: #020617;
+  padding: 10px 16px;
+  border-radius: 12px;
+  border: 1px solid #7c3aed;
+}
 
