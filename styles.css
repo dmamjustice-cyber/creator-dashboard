@@ -263,4 +263,25 @@ th, td {
   overflow-y:auto;
   margin-bottom:10px;
 }
+.plan-outline button {
+  margin-top: 14px;
+  padding: 10px 18px;
+  border-radius: 10px;
+  background: none;
+  border: 2px solid #7c3aed;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.plan-outline button:hover {
+  background: #7c3aed;
+}
+
+.plans-row {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
 
