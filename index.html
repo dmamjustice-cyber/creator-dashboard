@@ -8,35 +8,38 @@
 </head>
 <body>
 
-<!-- ============ LANDING PAGE ============ -->
-<div id="landing">
-  <div class="landing-hero">
-    <h1>AIVideoHub</h1>
-    <p>Create. Edit. Monetize with AI.</p>
-    <div class="landing-buttons">
-      <button onclick="openLogin()">Login</button>
-      <button class="outline" onclick="openApp()">Get Started</button>
+<!-- ========== LANDING / LOGIN ========== -->
+<div id="landing" class="landing-container">
+
+  <div class="slider">
+    <div class="slide active">
+      <div class="model-box">3D MODEL 1</div>
+      <h1>Automate Your Video Empire</h1>
+      <p>AI-powered creation and monetization.</p>
+    </div>
+    <div class="slide">
+      <div class="model-box">3D MODEL 2</div>
+      <h1>Edit at the Speed of AI</h1>
+      <p>Upload once, publish everywhere.</p>
+    </div>
+    <div class="slide">
+      <div class="model-box">3D MODEL 3</div>
+      <h1>Turn Views Into Revenue</h1>
+      <p>Track, optimize, scale.</p>
     </div>
   </div>
-</div>
 
-<!-- ============ LOGIN PAGE ============ -->
-<div id="login" class="hidden auth">
-  <h2>Login</h2>
-  <input id="email" placeholder="Email">
-  <input id="password" type="password" placeholder="Password">
-  <button onclick="login()">Login</button>
-  <p onclick="openLanding()">Back</p>
-</div>
-
-<!-- ============ APP ============ -->
-<div id="app" class="hidden">
-<div class="topbar">
-  <div class="user-badge">
-    <span id="topUser"></span>
+  <div class="login-card">
+    <h2>Login to AIVideoHub</h2>
+    <input id="email" placeholder="Email">
+    <input id="password" type="password" placeholder="Password">
+    <button onclick="login()">Login</button>
   </div>
-  <button class="upload-btn">+ Create & Upload Video</button>
+
 </div>
+
+<!-- ========== APP ========== -->
+<div id="app" class="hidden">
 
   <div class="sidebar">
     <h2 class="brand">AIVideoHub</h2>
@@ -47,111 +50,94 @@
     <div class="nav-item" onclick="showPage('account', this)">Account</div>
   </div>
 
-  <!-- DASHBOARD -->
- <div class="main page" id="dashboard">
+  <div class="main">
 
-  <h1>Welcome back!</h1>
-  <p class="muted">Here's your revenue and performance overview</p>
-
-  <div class="stats">
-    <div class="stat green">
-      <h3>$12,847</h3>
-      <p>Total Revenue</p>
-    </div>
-    <div class="stat">
-      <h3>2.4M</h3>
-      <p>Total Views</p>
-    </div>
-    <div class="stat">
-      <h3>$5.35</h3>
-      <p>RPM</p>
-    </div>
-    <div class="stat">
-      <h3>156</h3>
-      <p>Videos</p>
-    </div>
-  </div>
-
-  <div class="panels">
-    <div class="panel">
-      <h3>Revenue Analytics</h3>
-      <canvas id="revenueChart"></canvas>
+    <div class="topbar">
+      <div class="user-badge" id="topUser"></div>
+      <button class="upload-btn">+ Create & Upload Video</button>
     </div>
 
-    <div class="panel">
-      <h3>Revenue by Platform</h3>
-      <canvas id="viewsChart"></canvas>
-    </div>
-  </div>
+    <!-- DASHBOARD -->
+    <div class="page" id="dashboard">
 
-</div>
+      <h1>Welcome back</h1>
+      <p class="muted">Here's your revenue and performance overview</p>
 
-
-  <!-- AI ASSISTANT (B) -->
-  <div class="main page hidden" id="assistant">
-    <h2>AI Assistant</h2>
-    <div class="chat-box" id="chatBox"></div>
-    <input id="chatInput" placeholder="Ask the AI...">
-    <button onclick="sendMessage()">Send</button>
-  </div>
-
-  <!-- ANALYTICS (E) -->
-  <div class="main page hidden" id="analytics">
-    <h2>Analytics</h2>
-    <canvas id="viewsChart"></canvas>
-  </div>
-
-  <!-- SUBSCRIPTION (D + Cleaner UI) -->
-  <div class="main page hidden" id="subscription">
-    <h2>Choose Your Plan</h2>
-    <div class="plans-row">
-
-      <div class="plan-outline">
-        <h3>Free</h3>
-        <p>£0</p>
-        <ul>
-          <li>5 edits/day</li>
-          <li>1 AI upload/day</li>
-          <li>5 AI questions</li>
-          <li>5 accounts</li>
-        </ul>
-        <button>Current</button>
+      <div class="stats">
+        <div class="stat green"><h3>$12,847</h3><p>Total Revenue</p></div>
+        <div class="stat"><h3>2.4M</h3><p>Total Views</p></div>
+        <div class="stat"><h3>$5.35</h3><p>RPM</p></div>
+        <div class="stat"><h3>156</h3><p>Videos</p></div>
       </div>
 
-      <div class="plan-outline">
-        <h3>Creator</h3>
-        <p>£5/month</p>
-        <ul>
-          <li>10 edits/day</li>
-          <li>10 uploads</li>
-          <li>10 AI questions</li>
-          <li>20 accounts</li>
-        </ul>
-        <button onclick="subscribe('creator')">Upgrade</button>
-      </div>
-
-      <div class="plan-outline">
-        <h3>Pro</h3>
-        <p>£15/month</p>
-        <ul>
-          <li>Unlimited everything</li>
-        </ul>
-        <button onclick="subscribe('pro')">Go Pro</button>
+      <div class="panels">
+        <div class="panel">
+          <h3>Revenue Analytics</h3>
+          <canvas id="revenueChart"></canvas>
+        </div>
+        <div class="panel">
+          <h3>Revenue by Platform</h3>
+          <canvas id="viewsChart"></canvas>
+        </div>
       </div>
 
     </div>
-  </div>
 
-  <!-- ACCOUNT (C) -->
-  <div class="main page hidden" id="account">
-    <h2>Account</h2>
-    <p id="userEmail"></p>
-    <button onclick="logout()">Log Out</button>
-  </div>
+    <!-- AI ASSISTANT -->
+    <div class="page hidden" id="assistant">
+      <h2>AI Assistant</h2>
+      <div class="chat-box" id="chatBox"></div>
+      <div class="chat-bar">
+        <input id="chatInput" placeholder="Ask the AI...">
+        <button onclick="sendMessage()">Send</button>
+      </div>
+    </div>
 
+    <!-- ANALYTICS -->
+    <div class="page hidden" id="analytics">
+      <h2>Advanced Analytics</h2>
+      <div class="panels">
+        <div class="panel"><canvas id="viewsChart"></canvas></div>
+        <div class="panel"><canvas id="revenueChart"></canvas></div>
+      </div>
+    </div>
+
+    <!-- SUBSCRIPTION -->
+    <div class="page hidden" id="subscription">
+      <h2>Select a Plan</h2>
+      <div class="plans-row">
+
+        <div class="plan-outline">
+          <h3>Free</h3>
+          <p>£0</p>
+          <button>Current</button>
+        </div>
+
+        <div class="plan-outline">
+          <h3>Creator</h3>
+          <p>£5/mo</p>
+          <button onclick="subscribe('creator')">Upgrade</button>
+        </div>
+
+        <div class="plan-outline">
+          <h3>Pro</h3>
+          <p>£15/mo</p>
+          <button onclick="subscribe('pro')">Go Pro</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ACCOUNT -->
+    <div class="page hidden" id="account">
+      <h2>Account</h2>
+      <p id="userEmail"></p>
+      <button onclick="logout()">Log Out</button>
+    </div>
+
+  </div>
 </div>
 
 <script src="app.js"></script>
 </body>
 </html>
-
