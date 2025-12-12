@@ -1,143 +1,254 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>AIVideoHub</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <title>AIVideoHub — Dashboard</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
-<!-- ========== LANDING / LOGIN ========== -->
-<div id="landing" class="landing-container">
+  <!-- LANDING / LOGIN -->
+  <div id="landing" class="landing">
+    <div class="landing-left">
+      <div class="slider" aria-hidden="false">
+        <div class="slide active">
+          <div class="model-box">MODEL 1</div>
+          <h1>Automate Your Video Empire</h1>
+          <p>AI creation • smart editing • faster monetization</p>
+        </div>
+        <div class="slide">
+          <div class="model-box">MODEL 2</div>
+          <h1>Edit at the Speed of AI</h1>
+          <p>Publish to all platforms in one click</p>
+        </div>
+        <div class="slide">
+          <div class="model-box">MODEL 3</div>
+          <h1>Turn Views Into Revenue</h1>
+          <p>Real-time analytics and monetization tips</p>
+        </div>
+      </div>
+    </div>
 
-  <div class="slider">
-    <div class="slide active">
-      <div class="model-box">3D MODEL 1</div>
-      <h1>Automate Your Video Empire</h1>
-      <p>AI-powered creation and monetization.</p>
-    </div>
-    <div class="slide">
-      <div class="model-box">3D MODEL 2</div>
-      <h1>Edit at the Speed of AI</h1>
-      <p>Upload once, publish everywhere.</p>
-    </div>
-    <div class="slide">
-      <div class="model-box">3D MODEL 3</div>
-      <h1>Turn Views Into Revenue</h1>
-      <p>Track, optimize, scale.</p>
+    <div class="landing-right">
+      <div class="login-card">
+        <h2>Welcome back to AIVideoHub</h2>
+        <p class="muted">Sign in to access your creator dashboard</p>
+        <input id="email" type="email" placeholder="Email" />
+        <input id="password" type="password" placeholder="Password" />
+        <button class="primary-btn" onclick="login()">Log in</button>
+        <div class="small-actions">
+          <button class="outline-btn" onclick="openDemo()">Demo account</button>
+          <button class="outline-btn" onclick="openSignup()">Sign up</button>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="login-card">
-    <h2>Login to AIVideoHub</h2>
-    <input id="email" placeholder="Email">
-    <input id="password" type="password" placeholder="Password">
-    <button onclick="login()">Login</button>
+  <!-- APP -->
+  <div id="app" class="hidden app-root">
+    <aside class="sidebar">
+      <div class="brand">AIVideoHub</div>
+
+      <nav class="nav">
+        <div class="nav-item active" onclick="showPage('dashboard', this)">Dashboard</div>
+        <div class="nav-item" onclick="showPage('create', this)">AI Create</div>
+        <div class="nav-item" onclick="showPage('editor', this)">AI Editor</div>
+        <div class="nav-item" onclick="showPage('videos', this)">My Videos</div>
+        <div class="nav-item" onclick="showPage('revenue', this)">Revenue</div>
+        <div class="nav-item" onclick="showPage('multiupload', this)">Multi-Upload</div>
+        <div class="nav-item" onclick="showPage('analytics', this)">Analytics</div>
+        <div class="nav-item" onclick="showPage('optimize', this)">AI Optimize</div>
+        <div class="nav-item" onclick="showPage('accounts', this)">Accounts</div>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="profile" id="profileBox">
+          <div class="avatar">JD</div>
+          <div class="profile-info">
+            <div id="profileName">John Doe</div>
+            <div class="muted small" id="profileEmail">you@example.com</div>
+          </div>
+          <button class="ghost" onclick="logout()">Sign out</button>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="left-top">
+          <div class="user-badge" id="topUser">—</div>
+        </div>
+        <div class="right-top">
+          <button class="primary-small">+ Create & Upload Video</button>
+        </div>
+      </header>
+
+      <!-- PAGES -->
+      <!-- DASHBOARD -->
+      <section id="dashboard" class="page">
+        <div class="dashboard-grid">
+          <div class="hero-row">
+            <div class="welcome cream">
+              <h2>Welcome back</h2>
+              <p class="muted">Here's your revenue and performance overview</p>
+            </div>
+
+            <div class="slider-card cream">
+              <div class="model-box small">MODEL</div>
+              <div class="slide-text">
+                <h3>Spotlight</h3>
+                <p class="muted">Top recommendations & experiments</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="stats-row">
+            <div class="card cream stat green">
+              <div class="stat-title">Total Revenue</div>
+              <div class="stat-value">$12,847</div>
+              <div class="muted small">+12.3% this week</div>
+            </div>
+            <div class="card cream stat">
+              <div class="stat-title">Total Views</div>
+              <div class="stat-value">2.4M</div>
+              <div class="muted small">Shorts & Reels</div>
+            </div>
+            <div class="card cream stat">
+              <div class="stat-title">RPM</div>
+              <div class="stat-value">$5.35</div>
+              <div class="muted small">Revenue / 1k views</div>
+            </div>
+            <div class="card cream stat">
+              <div class="stat-title">Videos</div>
+              <div class="stat-value">156</div>
+              <div class="muted small">Total uploaded</div>
+            </div>
+          </div>
+
+          <div class="panels-row">
+            <div class="card cream big-panel">
+              <h3>Revenue Analytics</h3>
+              <canvas id="revenueChart" height="140"></canvas>
+            </div>
+            <div class="card cream big-panel">
+              <h3>Revenue by Platform</h3>
+              <canvas id="platformChart" height="140"></canvas>
+            </div>
+          </div>
+
+          <div class="table-row">
+            <div class="card cream wide">
+              <h3>Top Earning Videos</h3>
+              <table class="data-table">
+                <thead>
+                  <tr><th>Video</th><th>Views</th><th>Revenue</th><th>RPM</th><th>Status</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>AI Tutorial — Getting Started</td><td>125k</td><td>$892.50</td><td>67.14</td><td><span class="pill">Monetized</span></td></tr>
+                  <tr><td>Viral Comp — AI Strategy</td><td>234k</td><td>$1,521.00</td><td>65.50</td><td><span class="pill">Monetized</span></td></tr>
+                  <tr><td>Top 10 AI Video Tips</td><td>39k</td><td>$632.00</td><td>57.00</td><td><span class="pill">Monetized</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="platforms-row">
+            <div class="card cream small-platform">
+              <div class="platform-icon yt"></div>
+              <div>
+                <div class="muted small">YouTube Revenue</div>
+                <div class="stat-value">$8,450</div>
+              </div>
+            </div>
+            <div class="card cream small-platform">
+              <div class="platform-icon tt"></div>
+              <div>
+                <div class="muted small">TikTok Revenue</div>
+                <div class="stat-value">$2,890</div>
+              </div>
+            </div>
+            <div class="card cream small-platform">
+              <div class="platform-icon ig"></div>
+              <div>
+                <div class="muted small">Instagram Revenue</div>
+                <div class="stat-value">$1,320</div>
+              </div>
+            </div>
+            <div class="card cream small-platform">
+              <div class="platform-icon fb"></div>
+              <div>
+                <div class="muted small">Facebook Revenue</div>
+                <div class="stat-value">$187</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- AI CREATE (placeholder) -->
+      <section id="create" class="page hidden">
+        <div class="grid-wrap">
+          <div class="card cream"><h3>AI Create</h3><p class="muted">Create videos using AI templates.</p></div>
+          <div class="card cream"><h3>Templates</h3><p class="muted">Preset styles & formats.</p></div>
+        </div>
+      </section>
+
+      <!-- AI EDITOR -->
+      <section id="editor" class="page hidden">
+        <div class="grid-wrap">
+          <div class="card cream"><h3>AI Editor</h3><p class="muted">Trim, add captions, auto-cut.</p></div>
+        </div>
+      </section>
+
+      <!-- MY VIDEOS -->
+      <section id="videos" class="page hidden">
+        <div class="grid-wrap">
+          <div class="card cream"><h3>My Videos</h3><p class="muted">All uploaded content.</p></div>
+        </div>
+      </section>
+
+      <!-- REVENUE -->
+      <section id="revenue" class="page hidden">
+        <div class="grid-wrap">
+          <div class="card cream"><h3>Revenue</h3><p class="muted">Payouts, invoices, breakdowns.</p></div>
+        </div>
+      </section>
+
+      <!-- MULTI-UPLOAD -->
+      <section id="multiupload" class="page hidden">
+        <div class="grid-wrap">
+          <div class="card cream"><h3>Multi-Upload</h3><p class="muted">Schedule & publish everywhere.</p></div>
+        </div>
+      </section>
+
+      <!-- ANALYTICS -->
+      <section id="analytics" class="page hidden">
+        <div class="grid-wrap">
+          <div class="card cream big-panel"><h3>Views by Format</h3><canvas id="analyticsChart" height="140"></canvas></div>
+          <div class="card cream"><h3>Audience</h3><p class="muted">Demographics & retention</p></div>
+        </div>
+      </section>
+
+      <!-- AI OPTIMIZE -->
+      <section id="optimize" class="page hidden">
+        <div class="grid-wrap">
+          <div class="card cream"><h3>AI Optimize</h3><p class="muted">Suggested titles, thumbnails.</p></div>
+        </div>
+      </section>
+
+      <!-- ACCOUNTS -->
+      <section id="accounts" class="page hidden">
+        <div class="grid-wrap">
+          <div class="card cream"><h3>Accounts</h3><p class="muted">Connected platform accounts</p></div>
+        </div>
+      </section>
+
+    </main>
   </div>
 
-</div>
-
-<!-- ========== APP ========== -->
-<div id="app" class="hidden">
-
-  <div class="sidebar">
-    <h2 class="brand">AIVideoHub</h2>
-    <div class="nav-item active" onclick="showPage('dashboard', this)">Dashboard</div>
-    <div class="nav-item" onclick="showPage('assistant', this)">AI Assistant</div>
-    <div class="nav-item" onclick="showPage('analytics', this)">Analytics</div>
-    <div class="nav-item" onclick="showPage('subscription', this)">Subscription</div>
-    <div class="nav-item" onclick="showPage('account', this)">Account</div>
-  </div>
-
-  <div class="main">
-
-    <div class="topbar">
-      <div class="user-badge" id="topUser"></div>
-      <button class="upload-btn">+ Create & Upload Video</button>
-    </div>
-
-    <!-- DASHBOARD -->
-    <div class="page" id="dashboard">
-
-      <h1>Welcome back</h1>
-      <p class="muted">Here's your revenue and performance overview</p>
-
-      <div class="stats">
-        <div class="stat green"><h3>$12,847</h3><p>Total Revenue</p></div>
-        <div class="stat"><h3>2.4M</h3><p>Total Views</p></div>
-        <div class="stat"><h3>$5.35</h3><p>RPM</p></div>
-        <div class="stat"><h3>156</h3><p>Videos</p></div>
-      </div>
-
-      <div class="panels">
-        <div class="panel">
-          <h3>Revenue Analytics</h3>
-          <canvas id="revenueChart"></canvas>
-        </div>
-        <div class="panel">
-          <h3>Revenue by Platform</h3>
-          <canvas id="viewsChart"></canvas>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- AI ASSISTANT -->
-    <div class="page hidden" id="assistant">
-      <h2>AI Assistant</h2>
-      <div class="chat-box" id="chatBox"></div>
-      <div class="chat-bar">
-        <input id="chatInput" placeholder="Ask the AI...">
-        <button onclick="sendMessage()">Send</button>
-      </div>
-    </div>
-
-    <!-- ANALYTICS -->
-    <div class="page hidden" id="analytics">
-      <h2>Advanced Analytics</h2>
-      <div class="panels">
-        <div class="panel"><canvas id="viewsChart"></canvas></div>
-        <div class="panel"><canvas id="revenueChart"></canvas></div>
-      </div>
-    </div>
-
-    <!-- SUBSCRIPTION -->
-    <div class="page hidden" id="subscription">
-      <h2>Select a Plan</h2>
-      <div class="plans-row">
-
-        <div class="plan-outline">
-          <h3>Free</h3>
-          <p>£0</p>
-          <button>Current</button>
-        </div>
-
-        <div class="plan-outline">
-          <h3>Creator</h3>
-          <p>£5/mo</p>
-          <button onclick="subscribe('creator')">Upgrade</button>
-        </div>
-
-        <div class="plan-outline">
-          <h3>Pro</h3>
-          <p>£15/mo</p>
-          <button onclick="subscribe('pro')">Go Pro</button>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- ACCOUNT -->
-    <div class="page hidden" id="account">
-      <h2>Account</h2>
-      <p id="userEmail"></p>
-      <button onclick="logout()">Log Out</button>
-    </div>
-
-  </div>
-</div>
-
-<script src="app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
+html>
