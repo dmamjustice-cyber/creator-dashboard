@@ -1,254 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>AIVideoHub — Dashboard</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <link rel="stylesheet" href="styles.css" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8" />
+  <title>AIVideoHub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    /* ---------- GLOBAL ---------- */
+    *{box-sizing:border-box;margin:0;padding:0;font-family:Inter,Arial,sans-serif}
+    body{background:#0b1724;color:white;min-height:100vh}
+
+    :root{
+      --accent:#7c3aed;
+      --accent2:#2563eb;
+      --cream:#f5ede0;
+      --dark:#1f2a2a;
+    }
+
+    .hidden{display:none}
+
+    /* ---------- LANDING ---------- */
+    #landing{
+      height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:radial-gradient(circle at top,#4c1d95,#020617);
+    }
+
+    .landing-layout{
+      display:grid;
+      grid-template-columns:1fr 420px 1fr;
+      align-items:center;
+      gap:48px;
+      width:100%;
+      max-width:1200px;
+      padding:40px;
+    }
+
+    /* Floating feature bars */
+    .feature-stack{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      animation:floatStack 6s ease-in-out infinite;
+    }
+
+    .feature-card{
+      background:var(--cream);
+      color:var(--dark);
+      padding:14px 18px;
+      border-radius:14px;
+      font-weight:600;
+      width:260px;
+      box-shadow:0 20px 40px rgba(0,0,0,.25);
+      animation:cardFloat 4s ease-in-out infinite;
+    }
+
+    .feature-card:nth-child(2){animation-delay:.6s}
+    .feature-card:nth-child(3){animation-delay:1.2s}
+    .feature-card:nth-child(4){animation-delay:1.8s}
+
+    @keyframes floatStack{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+    @keyframes cardFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+    /* ---------- LOGIN / CREATE ---------- */
+    .auth-card{
+      background:rgba(255,255,255,0.06);
+      padding:32px;
+      border-radius:20px;
+      backdrop-filter:blur(10px);
+      animation:fadeUp .5s ease;
+    }
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+    .auth-card h1{font-size:26px;margin-bottom:8px}
+    .auth-card p{opacity:.75;margin-bottom:20px}
+
+    .auth-card input{
+      width:100%;
+      padding:14px;
+      margin-bottom:14px;
+      border-radius:12px;
+      border:none;
+      background:rgba(255,255,255,0.1);
+      color:white;
+    }
+
+    .auth-card button{
+      width:100%;
+      padding:14px;
+      border-radius:14px;
+      border:none;
+      cursor:pointer;
+      font-weight:600;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      color:white;
+      margin-bottom:10px;
+    }
+
+    .auth-toggle{
+      text-align:center;
+      opacity:.8;
+      cursor:pointer;
+      margin-top:10px;
+    }
+
+    .preview-btn{
+      background:none;
+      border:2px solid white;
+      color:white;
+    }
+
+    /* ---------- APP ---------- */
+    #app{display:flex;height:100vh}
+
+    .sidebar{
+      width:250px;
+      background:#020617;
+      padding:20px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+
+    .nav-item{
+      padding:12px;
+      border-radius:10px;
+      color:#9aa4c4;
+      cursor:pointer;
+      margin-bottom:6px;
+    }
+
+    .nav-item.active{background:linear-gradient(90deg,var(--accent),var(--accent2));color:white}
+
+    .profile{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      padding:12px;
+      background:rgba(255,255,255,0.04);
+      border-radius:14px;
+    }
+
+    .avatar{
+      width:42px;height:42px;
+      border-radius:10px;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      display:flex;align-items:center;justify-content:center;font-weight:700;
+    }
+
+    .main{flex:1;padding:32px;overflow:auto}
+
+    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+
+    .cream{background:var(--cream);color:var(--dark);border-radius:14px;padding:20px}
+
+    @media(max-width:900px){
+      .landing-layout{grid-template-columns:1fr}
+      .feature-stack{display:none}
+      .grid{grid-template-columns:repeat(2,1fr)}
+    }
+  </style>
 </head>
 <body>
 
-  <!-- LANDING / LOGIN -->
-  <div id="landing" class="landing">
-    <div class="landing-left">
-      <div class="slider" aria-hidden="false">
-        <div class="slide active">
-          <div class="model-box">MODEL 1</div>
-          <h1>Automate Your Video Empire</h1>
-          <p>AI creation • smart editing • faster monetization</p>
-        </div>
-        <div class="slide">
-          <div class="model-box">MODEL 2</div>
-          <h1>Edit at the Speed of AI</h1>
-          <p>Publish to all platforms in one click</p>
-        </div>
-        <div class="slide">
-          <div class="model-box">MODEL 3</div>
-          <h1>Turn Views Into Revenue</h1>
-          <p>Real-time analytics and monetization tips</p>
-        </div>
-      </div>
+<!-- LANDING -->
+<section id="landing">
+  <div class="landing-layout">
+
+    <!-- Left preview button -->
+    <div style="text-align:center">
+      <button class="preview-btn" onclick="enterPreview()">Enter Preview</button>
     </div>
 
-    <div class="landing-right">
-      <div class="login-card">
-        <h2>Welcome back to AIVideoHub</h2>
-        <p class="muted">Sign in to access your creator dashboard</p>
-        <input id="email" type="email" placeholder="Email" />
-        <input id="password" type="password" placeholder="Password" />
-        <button class="primary-btn" onclick="login()">Log in</button>
-        <div class="small-actions">
-          <button class="outline-btn" onclick="openDemo()">Demo account</button>
-          <button class="outline-btn" onclick="openSignup()">Sign up</button>
-        </div>
+    <!-- Center login / create -->
+    <div class="auth-card">
+      <h1 id="authTitle">Login</h1>
+      <p id="authSubtitle">Access your creator dashboard</p>
+      <input id="email" placeholder="Email" />
+      <input id="password" type="password" placeholder="Password" />
+      <button onclick="enterPreview()">Continue</button>
+      <div class="auth-toggle" onclick="toggleAuth()">Create an account</div>
+    </div>
+
+    <!-- Right floating features -->
+    <div class="feature-stack">
+      <div class="feature-card">🎬 AI Video Creation</div>
+      <div class="feature-card">🤖 AI Assistant</div>
+      <div class="feature-card">📊 Analytics</div>
+      <div class="feature-card">💰 Monetization</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- APP -->
+<section id="app" class="hidden">
+  <aside class="sidebar">
+    <div>
+      <h2>AIVideoHub</h2>
+      <div class="nav-item active">Dashboard</div>
+      <div class="nav-item">AI Assistant</div>
+      <div class="nav-item">Analytics</div>
+      <div class="nav-item">Subscription</div>
+      <div class="nav-item">Account</div>
+    </div>
+
+    <div class="profile">
+      <div class="avatar" id="avatar">U</div>
+      <div>
+        <div id="username">User</div>
+        <small style="opacity:.6">Preview</small>
       </div>
     </div>
-  </div>
+  </aside>
 
-  <!-- APP -->
-  <div id="app" class="hidden app-root">
-    <aside class="sidebar">
-      <div class="brand">AIVideoHub</div>
+  <main class="main">
+    <h1>Dashboard</h1>
+    <div class="grid">
+      <div class="cream">Revenue</div>
+      <div class="cream">Views</div>
+      <div class="cream">Uploads</div>
+      <div class="cream">AI Tips</div>
+    </div>
+  </main>
+</section>
 
-      <nav class="nav">
-        <div class="nav-item active" onclick="showPage('dashboard', this)">Dashboard</div>
-        <div class="nav-item" onclick="showPage('create', this)">AI Create</div>
-        <div class="nav-item" onclick="showPage('editor', this)">AI Editor</div>
-        <div class="nav-item" onclick="showPage('videos', this)">My Videos</div>
-        <div class="nav-item" onclick="showPage('revenue', this)">Revenue</div>
-        <div class="nav-item" onclick="showPage('multiupload', this)">Multi-Upload</div>
-        <div class="nav-item" onclick="showPage('analytics', this)">Analytics</div>
-        <div class="nav-item" onclick="showPage('optimize', this)">AI Optimize</div>
-        <div class="nav-item" onclick="showPage('accounts', this)">Accounts</div>
-      </nav>
+<script>
+  function enterPreview(){
+    const email = document.getElementById('email').value || 'preview-user';
+    document.getElementById('username').textContent = email.split('@')[0];
+    document.getElementById('avatar').textContent = email.charAt(0).toUpperCase();
+    document.getElementById('landing').classList.add('hidden');
+    document.getElementById('app').classList.remove('hidden');
+  }
 
-      <div class="sidebar-bottom">
-        <div class="profile" id="profileBox">
-          <div class="avatar">JD</div>
-          <div class="profile-info">
-            <div id="profileName">John Doe</div>
-            <div class="muted small" id="profileEmail">you@example.com</div>
-          </div>
-          <button class="ghost" onclick="logout()">Sign out</button>
-        </div>
-      </div>
-    </aside>
+  function toggleAuth(){
+    const title = document.getElementById('authTitle');
+    const subtitle = document.getElementById('authSubtitle');
+    const toggle = document.querySelector('.auth-toggle');
 
-    <main class="main-content">
-      <header class="topbar">
-        <div class="left-top">
-          <div class="user-badge" id="topUser">—</div>
-        </div>
-        <div class="right-top">
-          <button class="primary-small">+ Create & Upload Video</button>
-        </div>
-      </header>
-
-      <!-- PAGES -->
-      <!-- DASHBOARD -->
-      <section id="dashboard" class="page">
-        <div class="dashboard-grid">
-          <div class="hero-row">
-            <div class="welcome cream">
-              <h2>Welcome back</h2>
-              <p class="muted">Here's your revenue and performance overview</p>
-            </div>
-
-            <div class="slider-card cream">
-              <div class="model-box small">MODEL</div>
-              <div class="slide-text">
-                <h3>Spotlight</h3>
-                <p class="muted">Top recommendations & experiments</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="stats-row">
-            <div class="card cream stat green">
-              <div class="stat-title">Total Revenue</div>
-              <div class="stat-value">$12,847</div>
-              <div class="muted small">+12.3% this week</div>
-            </div>
-            <div class="card cream stat">
-              <div class="stat-title">Total Views</div>
-              <div class="stat-value">2.4M</div>
-              <div class="muted small">Shorts & Reels</div>
-            </div>
-            <div class="card cream stat">
-              <div class="stat-title">RPM</div>
-              <div class="stat-value">$5.35</div>
-              <div class="muted small">Revenue / 1k views</div>
-            </div>
-            <div class="card cream stat">
-              <div class="stat-title">Videos</div>
-              <div class="stat-value">156</div>
-              <div class="muted small">Total uploaded</div>
-            </div>
-          </div>
-
-          <div class="panels-row">
-            <div class="card cream big-panel">
-              <h3>Revenue Analytics</h3>
-              <canvas id="revenueChart" height="140"></canvas>
-            </div>
-            <div class="card cream big-panel">
-              <h3>Revenue by Platform</h3>
-              <canvas id="platformChart" height="140"></canvas>
-            </div>
-          </div>
-
-          <div class="table-row">
-            <div class="card cream wide">
-              <h3>Top Earning Videos</h3>
-              <table class="data-table">
-                <thead>
-                  <tr><th>Video</th><th>Views</th><th>Revenue</th><th>RPM</th><th>Status</th></tr>
-                </thead>
-                <tbody>
-                  <tr><td>AI Tutorial — Getting Started</td><td>125k</td><td>$892.50</td><td>67.14</td><td><span class="pill">Monetized</span></td></tr>
-                  <tr><td>Viral Comp — AI Strategy</td><td>234k</td><td>$1,521.00</td><td>65.50</td><td><span class="pill">Monetized</span></td></tr>
-                  <tr><td>Top 10 AI Video Tips</td><td>39k</td><td>$632.00</td><td>57.00</td><td><span class="pill">Monetized</span></td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div class="platforms-row">
-            <div class="card cream small-platform">
-              <div class="platform-icon yt"></div>
-              <div>
-                <div class="muted small">YouTube Revenue</div>
-                <div class="stat-value">$8,450</div>
-              </div>
-            </div>
-            <div class="card cream small-platform">
-              <div class="platform-icon tt"></div>
-              <div>
-                <div class="muted small">TikTok Revenue</div>
-                <div class="stat-value">$2,890</div>
-              </div>
-            </div>
-            <div class="card cream small-platform">
-              <div class="platform-icon ig"></div>
-              <div>
-                <div class="muted small">Instagram Revenue</div>
-                <div class="stat-value">$1,320</div>
-              </div>
-            </div>
-            <div class="card cream small-platform">
-              <div class="platform-icon fb"></div>
-              <div>
-                <div class="muted small">Facebook Revenue</div>
-                <div class="stat-value">$187</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- AI CREATE (placeholder) -->
-      <section id="create" class="page hidden">
-        <div class="grid-wrap">
-          <div class="card cream"><h3>AI Create</h3><p class="muted">Create videos using AI templates.</p></div>
-          <div class="card cream"><h3>Templates</h3><p class="muted">Preset styles & formats.</p></div>
-        </div>
-      </section>
-
-      <!-- AI EDITOR -->
-      <section id="editor" class="page hidden">
-        <div class="grid-wrap">
-          <div class="card cream"><h3>AI Editor</h3><p class="muted">Trim, add captions, auto-cut.</p></div>
-        </div>
-      </section>
-
-      <!-- MY VIDEOS -->
-      <section id="videos" class="page hidden">
-        <div class="grid-wrap">
-          <div class="card cream"><h3>My Videos</h3><p class="muted">All uploaded content.</p></div>
-        </div>
-      </section>
-
-      <!-- REVENUE -->
-      <section id="revenue" class="page hidden">
-        <div class="grid-wrap">
-          <div class="card cream"><h3>Revenue</h3><p class="muted">Payouts, invoices, breakdowns.</p></div>
-        </div>
-      </section>
-
-      <!-- MULTI-UPLOAD -->
-      <section id="multiupload" class="page hidden">
-        <div class="grid-wrap">
-          <div class="card cream"><h3>Multi-Upload</h3><p class="muted">Schedule & publish everywhere.</p></div>
-        </div>
-      </section>
-
-      <!-- ANALYTICS -->
-      <section id="analytics" class="page hidden">
-        <div class="grid-wrap">
-          <div class="card cream big-panel"><h3>Views by Format</h3><canvas id="analyticsChart" height="140"></canvas></div>
-          <div class="card cream"><h3>Audience</h3><p class="muted">Demographics & retention</p></div>
-        </div>
-      </section>
-
-      <!-- AI OPTIMIZE -->
-      <section id="optimize" class="page hidden">
-        <div class="grid-wrap">
-          <div class="card cream"><h3>AI Optimize</h3><p class="muted">Suggested titles, thumbnails.</p></div>
-        </div>
-      </section>
-
-      <!-- ACCOUNTS -->
-      <section id="accounts" class="page hidden">
-        <div class="grid-wrap">
-          <div class="card cream"><h3>Accounts</h3><p class="muted">Connected platform accounts</p></div>
-        </div>
-      </section>
-
-    </main>
-  </div>
-
-  <script src="app.js"></script>
+    if(title.textContent === 'Login'){
+      title.textContent = 'Create Account';
+      subtitle.textContent = 'Start building with AIVideoHub';
+      toggle.textContent = 'Already have an account? Login';
+    } else {
+      title.textContent = 'Login';
+      subtitle.textContent = 'Access your creator dashboard';
+      toggle.textContent = 'Create an account';
+    }
+  }
+</script>
 </body>
 </html>
-html>
