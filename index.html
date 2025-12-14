@@ -9,19 +9,17 @@
     /* ---------- GLOBAL ---------- */
     *{box-sizing:border-box;margin:0;padding:0;font-family:Inter,Arial,sans-serif}
     body{background:#0b1724;color:white;min-height:100vh}
-
     :root{
       --accent:#7c3aed;
       --accent2:#2563eb;
       --cream:#f5ede0;
       --dark:#1f2a2a;
     }
-
     .hidden{display:none}
 
     /* ---------- LANDING ---------- */
     #landing{
-      height:100vh;
+      min-height:100svh;
       display:flex;
       align-items:center;
       justify-content:center;
@@ -44,6 +42,7 @@
       flex-direction:column;
       gap:14px;
       animation:floatStack 6s ease-in-out infinite;
+      justify-self:end;
     }
 
     .feature-card{
@@ -71,6 +70,8 @@
       border-radius:20px;
       backdrop-filter:blur(10px);
       animation:fadeUp .5s ease;
+      border:1px solid rgba(255,255,255,0.08);
+      box-shadow:0 20px 60px rgba(0,0,0,.28);
     }
 
     @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
@@ -86,6 +87,7 @@
       border:none;
       background:rgba(255,255,255,0.1);
       color:white;
+      outline:none;
     }
 
     .auth-card button{
@@ -94,7 +96,7 @@
       border-radius:14px;
       border:none;
       cursor:pointer;
-      font-weight:600;
+      font-weight:800;
       background:linear-gradient(135deg,var(--accent),var(--accent2));
       color:white;
       margin-bottom:10px;
@@ -105,35 +107,92 @@
       opacity:.8;
       cursor:pointer;
       margin-top:10px;
+      user-select:none;
     }
 
     .preview-btn{
       background:none;
-      border:2px solid white;
+      border:2px solid rgba(255,255,255,0.75);
       color:white;
+      padding:14px 18px;
+      border-radius:14px;
+      font-weight:800;
+      cursor:pointer;
+      transition:transform .15s ease, border-color .15s ease;
     }
+    .preview-btn:hover{transform:translateY(-1px);border-color:white}
 
-    /* ---------- APP ---------- */
+    /* ---------- APP LAYOUT ---------- */
     #app{display:flex;height:100vh}
 
     .sidebar{
-      width:250px;
+      width:260px;
       background:#020617;
-      padding:20px;
+      padding:18px;
       display:flex;
       flex-direction:column;
       justify-content:space-between;
+      border-right:1px solid rgba(255,255,255,0.06);
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 10px 16px;
+    }
+    .brand-badge{
+      width:36px;height:36px;border-radius:12px;
+      display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      font-weight:900;
+      box-shadow:0 16px 30px rgba(0,0,0,.2);
+    }
+    .brand h2{font-size:16px;letter-spacing:.2px}
+    .brand small{opacity:.65;font-weight:700}
+
+    .nav{
+      padding:6px 6px 10px;
     }
 
     .nav-item{
-      padding:12px;
-      border-radius:10px;
+      padding:12px 12px;
+      border-radius:12px;
       color:#9aa4c4;
       cursor:pointer;
       margin-bottom:6px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      position:relative;
+      transition: background .2s ease, color .2s ease, transform .2s ease;
+      user-select:none;
+    }
+    .nav-item:hover{ transform: translateX(2px); color: #e9edff; background:rgba(255,255,255,0.04); }
+
+    .nav-item.active{
+      background:linear-gradient(90deg, rgba(124,58,237,0.35), rgba(37,99,235,0.25));
+      color:white;
+      border:1px solid rgba(255,255,255,0.06);
+    }
+    .nav-item.active::before{
+      content:"";
+      position:absolute;
+      left:-10px;
+      top:10px;
+      bottom:10px;
+      width:4px;
+      border-radius:6px;
+      background: linear-gradient(180deg, var(--accent), var(--accent2));
     }
 
-    .nav-item.active{background:linear-gradient(90deg,var(--accent),var(--accent2));color:white}
+    .nav-ico{
+      width:28px;height:28px;border-radius:10px;
+      display:flex;align-items:center;justify-content:center;
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.06);
+      font-size:14px;
+    }
 
     .profile{
       display:flex;
@@ -141,29 +200,198 @@
       align-items:center;
       padding:12px;
       background:rgba(255,255,255,0.04);
-      border-radius:14px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,0.06);
     }
 
     .avatar{
       width:42px;height:42px;
-      border-radius:10px;
+      border-radius:12px;
       background:linear-gradient(135deg,var(--accent),var(--accent2));
-      display:flex;align-items:center;justify-content:center;font-weight:700;
+      display:flex;align-items:center;justify-content:center;font-weight:900;
+      box-shadow:0 16px 30px rgba(0,0,0,.2);
     }
 
-    .main{flex:1;padding:32px;overflow:auto}
+    .main{
+      flex:1;
+      padding:28px;
+      overflow:auto;
+      position:relative;
+    }
 
-    .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    /* ---------- PAGES + TRANSITIONS ---------- */
+    .page{
+      opacity:0;
+      transform:translateY(10px);
+      pointer-events:none;
+      transition:opacity .22s ease, transform .22s ease;
+    }
+    .page.active-page{
+      opacity:1;
+      transform:translateY(0);
+      pointer-events:auto;
+    }
 
-    .cream{background:var(--cream);color:var(--dark);border-radius:14px;padding:20px}
+    .page-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:14px;
+    }
+    .page-head h1{font-size:28px}
+    .muted{opacity:.75}
 
+    .pill{
+      display:inline-flex;
+      padding:6px 10px;
+      border-radius:999px;
+      background:rgba(124,58,237,0.18);
+      border:1px solid rgba(124,58,237,0.35);
+      font-size:12px;
+      font-weight:900;
+    }
+
+    .page-shell{
+      margin-top:18px;
+      background:rgba(255,255,255,0.03);
+      border:1px solid rgba(255,255,255,0.06);
+      border-radius:18px;
+      padding:18px;
+    }
+
+    .kpi-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:14px;
+      margin-top:16px;
+    }
+    .kpi{
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:16px;
+      padding:14px;
+    }
+    .kpi .label{opacity:.7;font-weight:800;font-size:12px}
+    .kpi .value{font-size:22px;font-weight:900;margin-top:6px}
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:14px;
+      margin-top:14px;
+    }
+
+    .cream{
+      background:rgba(255,255,255,0.06);
+      color:white;
+      border-radius:16px;
+      padding:18px;
+      border:1px solid rgba(255,255,255,0.08);
+      box-shadow:0 16px 30px rgba(0,0,0,.16);
+    }
+
+    .card{
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(255,255,255,0.08);
+      border-radius:18px;
+      padding:18px;
+      box-shadow:0 16px 30px rgba(0,0,0,.18);
+    }
+    .card h3{font-size:18px;margin-bottom:6px}
+    .price{font-size:34px;font-weight:900;margin:10px 0 6px}
+    .price small{font-size:14px;opacity:.7;font-weight:700}
+
+    .feature-list{
+      margin-top:12px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      opacity:.92;
+    }
+
+    .primary-btn{
+      width:100%;
+      padding:12px 14px;
+      border-radius:14px;
+      border:none;
+      cursor:pointer;
+      font-weight:900;
+      color:white;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      margin-top:14px;
+    }
+    .secondary-btn{
+      width:100%;
+      padding:12px 14px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,0.2);
+      background:transparent;
+      color:white;
+      cursor:pointer;
+      font-weight:900;
+      margin-top:14px;
+    }
+
+    .toggle{
+      display:flex;
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.10);
+      border-radius:999px;
+      overflow:hidden;
+    }
+    .toggle button{
+      background:transparent;
+      border:none;
+      color:rgba(255,255,255,0.75);
+      padding:8px 12px;
+      cursor:pointer;
+      font-weight:900;
+      white-space:nowrap;
+    }
+    .toggle button.active{
+      color:white;
+      background:rgba(255,255,255,0.10);
+    }
+
+    .pricing-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+      margin-top:14px;
+    }
+
+    /* Chat box */
+    .chatBox{
+      flex:1;
+      overflow:auto;
+      background:rgba(0,0,0,.14);
+      border:1px solid rgba(255,255,255,.08);
+      padding:14px;
+      border-radius:14px;
+    }
+
+    .input{
+      padding:14px;
+      border-radius:14px;
+      border:none;
+      background:rgba(255,255,255,0.08);
+      color:white;
+      outline:none;
+      width:100%;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
     @media(max-width:900px){
       .landing-layout{grid-template-columns:1fr}
       .feature-stack{display:none}
-      .grid{grid-template-columns:repeat(2,1fr)}
+      .sidebar{width:220px}
+      .kpi-grid{grid-template-columns:repeat(2,1fr)}
+      .pricing-grid{grid-template-columns:1fr}
+      .main{padding:20px}
     }
   </style>
 </head>
+
 <body>
 
 <!-- LANDING -->
@@ -172,16 +400,21 @@
 
     <!-- Left preview button -->
     <div style="text-align:center">
-      <button class="preview-btn" onclick="enterPreview()">Enter Preview</button>
+      <button class="preview-btn" type="button" onclick="openDemo()">Enter Preview</button>
+      <div style="margin-top:10px;opacity:.7;font-weight:700;font-size:12px;">
+        No signup needed (demo mode)
+      </div>
     </div>
 
     <!-- Center login / create -->
     <div class="auth-card">
       <h1 id="authTitle">Login</h1>
       <p id="authSubtitle">Access your creator dashboard</p>
-      <input id="email" placeholder="Email" />
-      <input id="password" type="password" placeholder="Password" />
-      <button onclick="enterPreview()">Continue</button>
+
+      <input id="email" type="email" placeholder="Email" aria-label="Email address" />
+      <input id="password" type="password" placeholder="Password" aria-label="Password" />
+
+      <button type="button" onclick="login()">Continue</button>
       <div class="auth-toggle" onclick="toggleAuth()">Create an account</div>
     </div>
 
@@ -200,43 +433,240 @@
 <section id="app" class="hidden">
   <aside class="sidebar">
     <div>
-      <h2>AIVideoHub</h2>
-      <div class="nav-item active">Dashboard</div>
-      <div class="nav-item">AI Assistant</div>
-      <div class="nav-item">Analytics</div>
-      <div class="nav-item">Subscription</div>
-      <div class="nav-item">Account</div>
+      <div class="brand">
+        <div class="brand-badge">AI</div>
+        <div>
+          <h2>AIVideoHub</h2>
+          <small>Creator Suite</small>
+        </div>
+      </div>
+
+      <div class="nav">
+        <div class="nav-item active" data-page="dashboard" onclick="navigate('dashboard', this)">
+          <div class="nav-ico">🏠</div> Dashboard
+        </div>
+        <div class="nav-item" data-page="assistant" onclick="navigate('assistant', this)">
+          <div class="nav-ico">🤖</div> AI Assistant
+        </div>
+        <div class="nav-item" data-page="analytics" onclick="navigate('analytics', this)">
+          <div class="nav-ico">📊</div> Analytics
+        </div>
+        <div class="nav-item" data-page="subscription" onclick="navigate('subscription', this)">
+          <div class="nav-ico">💳</div> Subscription
+        </div>
+        <div class="nav-item" data-page="account" onclick="navigate('account', this)">
+          <div class="nav-ico">⚙️</div> Account
+        </div>
+      </div>
     </div>
 
     <div class="profile">
       <div class="avatar" id="avatar">U</div>
       <div>
-        <div id="username">User</div>
-        <small style="opacity:.6">Preview</small>
+        <div id="username" style="font-weight:900">User</div>
+        <small class="muted" id="userTag">Preview</small>
       </div>
     </div>
   </aside>
 
   <main class="main">
-    <h1>Dashboard</h1>
-    <div class="grid">
-      <div class="cream">Revenue</div>
-      <div class="cream">Views</div>
-      <div class="cream">Uploads</div>
-      <div class="cream">AI Tips</div>
-    </div>
+
+    <!-- DASHBOARD -->
+    <section id="dashboard" class="page active-page">
+      <div class="page-head">
+        <div>
+          <h1>Dashboard</h1>
+          <div class="muted">Your creator overview for the week.</div>
+        </div>
+        <div class="muted">Status: <span class="pill">Preview</span></div>
+      </div>
+
+      <div class="kpi-grid">
+        <div class="kpi"><div class="label">Revenue</div><div class="value">£2,740</div></div>
+        <div class="kpi"><div class="label">Views</div><div class="value">128k</div></div>
+        <div class="kpi"><div class="label">Uploads</div><div class="value">14</div></div>
+        <div class="kpi"><div class="label">Conversion</div><div class="value">3.2%</div></div>
+      </div>
+
+      <div class="page-shell">
+        <div style="font-weight:900;margin-bottom:10px;">Quick actions</div>
+        <div class="grid">
+          <div class="cream">🎬 Create video <div class="muted" style="margin-top:8px;">Templates + AI workflow (coming soon)</div></div>
+          <div class="cream">🤖 Ask AI for hooks <div class="muted" style="margin-top:8px;">Generate 10 hook variations instantly</div></div>
+          <div class="cream">📊 View analytics <div class="muted" style="margin-top:8px;">Track what actually converts</div></div>
+          <div class="cream">💰 Upgrade plan <div class="muted" style="margin-top:8px;">Unlock unlimited AI + exports</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI ASSISTANT -->
+    <section id="assistant" class="page">
+      <div class="page-head">
+        <div>
+          <h1>AI Assistant</h1>
+          <div class="muted">Generate hooks, scripts, titles, and captions.</div>
+        </div>
+        <div class="muted"><span class="pill">Beta</span></div>
+      </div>
+
+      <div class="page-shell" style="display:flex;flex-direction:column;gap:12px;height:520px;">
+        <div id="chatBox" class="chatBox">
+          <p class="muted"><b>AI:</b> Tell me your niche and platform, and I’ll generate hooks + a script outline.</p>
+          <p class="muted"><b>AI:</b> Example: “Fitness tips for busy parents on TikTok.”</p>
+        </div>
+        <div style="display:flex;gap:10px;">
+          <input id="chatInput" class="input" placeholder="Type a message..." />
+          <button type="button" class="primary-btn" style="width:auto" onclick="sendMessage()">Send</button>
+        </div>
+        <div class="muted" style="font-size:12px;">
+          Tip: If you have a backend, set it to POST <b>http://localhost:8000/api/ai</b> with JSON: {"question":"..."}.
+        </div>
+      </div>
+    </section>
+
+    <!-- ANALYTICS -->
+    <section id="analytics" class="page">
+      <div class="page-head">
+        <div>
+          <h1>Analytics</h1>
+          <div class="muted">Track what’s working across platforms.</div>
+        </div>
+        <div class="muted">Range: <span class="pill">Last 7 days</span></div>
+      </div>
+
+      <div class="page-shell">
+        <div class="grid">
+          <div class="cream"><b>Top video</b><div class="muted" style="margin-top:8px;">“AI Edit Trick”</div></div>
+          <div class="cream"><b>Best platform</b><div class="muted" style="margin-top:8px;">YouTube</div></div>
+          <div class="cream"><b>Peak time</b><div class="muted" style="margin-top:8px;">7–9pm</div></div>
+          <div class="cream"><b>Retention</b><div class="muted" style="margin-top:8px;">42%</div></div>
+        </div>
+
+        <div class="card" style="margin-top:14px;">
+          <h3>Recommendations</h3>
+          <div class="muted">Based on your recent uploads</div>
+          <div class="feature-list" style="margin-top:12px;">
+            <div>✅ Try <b>shorter intros</b> (0.8–1.2s) to lift retention</div>
+            <div>✅ Repurpose top performer into <b>3 variations</b> (angle change)</div>
+            <div>✅ Add <b>on-screen captions</b> early (first 2 seconds)</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SUBSCRIPTION -->
+    <section id="subscription" class="page">
+      <div class="page-head">
+        <div>
+          <h1>Subscription</h1>
+          <div class="muted">Upgrade to unlock monetization + advanced AI tools.</div>
+        </div>
+
+        <div class="toggle">
+          <button id="billMonthly" class="active" type="button" onclick="setBilling('monthly')">Monthly</button>
+          <button id="billYearly" type="button" onclick="setBilling('yearly')">Yearly <span style="opacity:.8;font-weight:900;">(save 20%)</span></button>
+        </div>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- Starter -->
+        <div class="card">
+          <h3>Starter</h3>
+          <div class="muted">For testing the workflow.</div>
+          <div class="price" data-monthly="£9" data-yearly="£86">£9 <small>/mo</small></div>
+          <div class="feature-list">
+            <div>✅ 20 AI prompts / day</div>
+            <div>✅ Basic analytics</div>
+            <div>✅ 720p exports</div>
+          </div>
+          <button class="secondary-btn" type="button" onclick="subscribe('Starter')">Choose Starter</button>
+        </div>
+
+        <!-- Pro -->
+        <div class="card" style="border:1px solid rgba(124,58,237,0.45);">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <h3>Pro</h3>
+            <span class="pill">Most popular</span>
+          </div>
+          <div class="muted">For serious creators.</div>
+          <div class="price" data-monthly="£19" data-yearly="£182">£19 <small>/mo</small></div>
+          <div class="feature-list">
+            <div>✅ Unlimited AI prompts</div>
+            <div>✅ Advanced analytics</div>
+            <div>✅ 1080p exports</div>
+            <div>✅ Auto-caption + hooks</div>
+          </div>
+          <button class="primary-btn" type="button" onclick="subscribe('Pro')">Upgrade to Pro</button>
+        </div>
+
+        <!-- Studio -->
+        <div class="card">
+          <h3>Studio</h3>
+          <div class="muted">For teams & agencies.</div>
+          <div class="price" data-monthly="£49" data-yearly="£470">£49 <small>/mo</small></div>
+          <div class="feature-list">
+            <div>✅ 5 seats included</div>
+            <div>✅ Team analytics dashboard</div>
+            <div>✅ Priority support</div>
+            <div>✅ Brand templates</div>
+          </div>
+          <button class="secondary-btn" type="button" onclick="subscribe('Studio')">Contact sales</button>
+        </div>
+      </div>
+
+      <div class="page-shell" style="margin-top:16px;display:flex;justify-content:space-between;gap:14px;align-items:center;">
+        <div>
+          <div style="font-weight:900;">Need a custom plan?</div>
+          <div class="muted">Tailored seats, usage limits, and reporting.</div>
+        </div>
+        <button class="secondary-btn" style="width:auto" type="button" onclick="subscribe('Custom')">Talk to us</button>
+      </div>
+    </section>
+
+    <!-- ACCOUNT -->
+    <section id="account" class="page">
+      <div class="page-head">
+        <div>
+          <h1>Account</h1>
+          <div class="muted">Manage your profile and settings.</div>
+        </div>
+        <button class="secondary-btn" style="width:auto" type="button" onclick="logout()">Log out</button>
+      </div>
+
+      <div class="page-shell">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+          <div class="card">
+            <h3>Profile</h3>
+            <div class="muted">Update your public creator info.</div>
+            <div style="margin-top:12px;display:flex;flex-direction:column;gap:10px;">
+              <input class="input" id="profileNameInput" placeholder="Display name" />
+              <input class="input" placeholder="Creator niche (e.g. tech, fitness)" />
+              <button type="button" class="primary-btn" onclick="saveProfile()">Save changes</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Preferences</h3>
+            <div class="muted">Tune recommendations and exports.</div>
+            <div style="margin-top:12px;display:flex;flex-direction:column;gap:10px;">
+              <div class="muted">Default format</div>
+              <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                <span class="pill">Shorts</span>
+                <span class="pill" style="background:rgba(37,99,235,0.18);border-color:rgba(37,99,235,0.35);">Long-form</span>
+                <span class="pill" style="background:rgba(34,197,94,0.18);border-color:rgba(34,197,94,0.35);">Reels</span>
+              </div>
+              <button type="button" class="secondary-btn" onclick="alert('Integrations screen coming soon!')">Manage integrations</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 </section>
 
 <script>
-  function enterPreview(){
-    const email = document.getElementById('email').value || 'preview-user';
-    document.getElementById('username').textContent = email.split('@')[0];
-    document.getElementById('avatar').textContent = email.charAt(0).toUpperCase();
-    document.getElementById('landing').classList.add('hidden');
-    document.getElementById('app').classList.remove('hidden');
-  }
-
+  /* ---------- AUTH UI TOGGLE (visual only) ---------- */
   function toggleAuth(){
     const title = document.getElementById('authTitle');
     const subtitle = document.getElementById('authSubtitle');
@@ -252,6 +682,166 @@
       toggle.textContent = 'Create an account';
     }
   }
+
+  /* ---------- LOGIN / SESSION ---------- */
+  const landing = document.getElementById('landing');
+  const appRoot = document.getElementById('app');
+
+  function updateUserUI(email){
+    const name = (email || 'User').split('@')[0] || 'User';
+    document.getElementById('username').textContent = name;
+    document.getElementById('userTag').textContent = 'Preview';
+
+    const initials = name
+      .replace(/[^a-z0-9]+/gi, ' ')
+      .trim()
+      .split(' ')
+      .filter(Boolean)
+      .map(s => s[0].toUpperCase())
+      .join('')
+      .slice(0,2) || 'U';
+
+    document.getElementById('avatar').textContent = initials;
+
+    const profileNameInput = document.getElementById('profileNameInput');
+    if (profileNameInput && !profileNameInput.value) profileNameInput.value = name;
+  }
+
+  function login(){
+    const emailEl = document.getElementById('email');
+    const email = (emailEl && emailEl.value || '').trim();
+    if (!email) return alert('Please enter an email to continue.');
+
+    localStorage.setItem('user', email);
+
+    updateUserUI(email);
+    landing.classList.add('hidden');
+    appRoot.classList.remove('hidden');
+
+    // default page
+    const firstNav = document.querySelector('.nav-item');
+    if (firstNav) navigate('dashboard', firstNav);
+  }
+
+  function openDemo(){
+    const emailEl = document.getElementById('email');
+    const passEl = document.getElementById('password');
+    if (emailEl) emailEl.value = 'demo@aivideohub.com';
+    if (passEl) passEl.value = 'demo123';
+    login();
+  }
+
+  function logout(){
+    localStorage.removeItem('user');
+    location.reload();
+  }
+
+  function saveProfile(){
+    alert('Saved (demo). Hook this to your backend later.');
+  }
+
+  // Restore session
+  window.addEventListener('load', () => {
+    const user = localStorage.getItem('user');
+    if (user) {
+      updateUserUI(user);
+      landing.classList.add('hidden');
+      appRoot.classList.remove('hidden');
+
+      // ensure dashboard active
+      const dashNav = document.querySelector('.nav-item[data-page="dashboard"]') || document.querySelector('.nav-item');
+      if (dashNav) navigate('dashboard', dashNav);
+    }
+  });
+
+  /* ---------- SMOOTH NAVIGATION ---------- */
+  function navigate(pageId, el){
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
+    const target = document.getElementById(pageId);
+    if (target) target.classList.add('active-page');
+
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+    if (el) el.classList.add('active');
+
+    const main = document.querySelector('.main');
+    if (main) main.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  /* ---------- SUBSCRIPTION TOGGLE ---------- */
+  function setBilling(mode){
+    const monthlyBtn = document.getElementById('billMonthly');
+    const yearlyBtn = document.getElementById('billYearly');
+    if (monthlyBtn && yearlyBtn){
+      monthlyBtn.classList.toggle('active', mode === 'monthly');
+      yearlyBtn.classList.toggle('active', mode === 'yearly');
+    }
+
+    document.querySelectorAll('.price').forEach(node => {
+      const val = node.dataset[mode];
+      if (!val) return;
+      node.innerHTML = `${val} <small>${mode === 'monthly' ? '/mo' : '/yr'}</small>`;
+    });
+  }
+
+  function subscribe(plan){
+    alert(`Mock checkout: ${plan}. Replace with Stripe/PayPal when ready.`);
+  }
+
+  /* ---------- AI CHAT (mock + backend fallback) ---------- */
+  async function sendMessage(){
+    const input = document.getElementById('chatInput');
+    const chatBox = document.getElementById('chatBox');
+    if (!input || !chatBox) return;
+
+    const text = input.value.trim();
+    if (!text) return;
+
+    const userP = document.createElement('p');
+    userP.innerHTML = `<b>You:</b> ${escapeHtml(text)}`;
+    userP.style.marginTop = '10px';
+    chatBox.appendChild(userP);
+    input.value = '';
+
+    // Try backend if available
+    try{
+      const resp = await fetch('http://localhost:8000/api/ai', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ question: text })
+      });
+      const json = await resp.json();
+      const ans = json.answer || json.error || '(No response)';
+      appendAI(ans);
+    }catch(e){
+      // Offline mock response
+      appendAI(mockAI(text));
+    }
+
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }
+
+  function appendAI(msg){
+    const chatBox = document.getElementById('chatBox');
+    const aiP = document.createElement('p');
+    aiP.innerHTML = `<b>AI:</b> ${escapeHtml(msg)}`;
+    aiP.className = 'muted';
+    aiP.style.marginTop = '10px';
+    chatBox.appendChild(aiP);
+  }
+
+  function mockAI(text){
+    const t = text.toLowerCase();
+    if (t.includes('hook')) return "Here are 5 hooks: 1) Stop scrolling—this changes everything… 2) I wish I knew this earlier… 3) 3 mistakes you’re making… 4) Do this for 7 days… 5) The fastest way to improve…";
+    if (t.includes('script')) return "Script outline: (1) Hook (0–2s) (2) Promise/Outcome (2–4s) (3) Steps (4–25s) (4) Quick recap (25–28s) (5) CTA (28–30s).";
+    return "Tell me your niche + platform + goal (views, sales, subs) and I’ll generate titles, hooks, and a short script.";
+  }
+
+  function escapeHtml(str){
+    return String(str).replace(/[&<>"']/g, s => ({
+      '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+    }[s]));
+  }
 </script>
+
 </body>
 </html>
