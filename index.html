@@ -454,3 +454,530 @@
         <div>
           <div class="name" id="username">John</div>
           <div class="tag" id="userTag">Preview</div>
+        </div>
+        <button class="gear-btn" type="button" title="Logout" onclick="logout()">⏻</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div>
+          <h1 id="greeting">Welcome back, John!</h1>
+          <div class="sub">Here’s your revenue and performance overview</div>
+        </div>
+        <div class="top-actions">
+          <button class="icon-btn" type="button" title="Notifications">🔔</button>
+          <button class="primary-btn" type="button" onclick="navigate('upload', document.querySelector('[data-page=upload]'))">
+            ➕ Create & Upload Video
+          </button>
+        </div>
+      </div>
+
+      <!-- DASHBOARD -->
+      <section id="dashboard" class="page active-page">
+        <div class="kpi-row">
+          <div class="card kpi green">
+            <div class="kpi-top"><div class="kpi-ico">💵</div><div class="delta">+18.2%</div></div>
+            <div class="value">£12,847</div>
+            <div class="label">Total Revenue (7d)</div>
+          </div>
+          <div class="card kpi">
+            <div class="kpi-top"><div class="kpi-ico">👁️</div><div class="delta">+11.5%</div></div>
+            <div class="value">2.4M</div>
+            <div class="label">Total Views</div>
+          </div>
+          <div class="card kpi">
+            <div class="kpi-top"><div class="kpi-ico">💳</div><div class="delta">+£2.15</div></div>
+            <div class="value">£5.35</div>
+            <div class="label">RPM (avg)</div>
+          </div>
+          <div class="card kpi">
+            <div class="kpi-top"><div class="kpi-ico">🎞️</div><div class="delta">+8</div></div>
+            <div class="value">156</div>
+            <div class="label">Uploaded Videos</div>
+          </div>
+        </div>
+
+        <div class="dash-grid">
+          <div class="card panel">
+            <div class="panel-title">Revenue Analytics</div>
+            <div class="placeholder"></div>
+          </div>
+          <div class="card panel">
+            <div class="panel-title">Revenue by Platform</div>
+            <div class="placeholder"></div>
+          </div>
+        </div>
+
+        <div class="card table-card">
+          <div class="table-head">
+            <h3>Top Performing Videos</h3>
+            <div class="link" onclick="navigate('videos', document.querySelector('[data-page=videos]'))">View All</div>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th style="width:45%;">Video</th>
+                <th>Views</th>
+                <th>Revenue</th>
+                <th>RPM</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>AI Thumbnail: Getting Started</td><td>125k</td><td>£392.50</td><td>£7.14</td><td><span class="status">Monetized</span></td></tr>
+              <tr><td>My AI Comic Strategy</td><td>234k</td><td>£1,321.00</td><td>£6.50</td><td><span class="status">Monetized</span></td></tr>
+              <tr><td>Top 10 AI Video Tips</td><td>98k</td><td>£63.00</td><td>£7.00</td><td><span class="status">Monetized</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ASK AI -->
+      <section id="assistant" class="page">
+        <div class="pill">✨ Ask AI • Hooks • Scripts • Titles • Captions</div>
+
+        <div class="card panel" style="margin-top:12px;">
+          <div class="panel-title">Chat</div>
+          <div id="chatBox" class="placeholder" style="height:220px;overflow:auto;padding:12px;border-style:solid;border-color:rgba(255,255,255,0.08);border-width:1px;background:rgba(0,0,0,0.15)">
+            <p class="muted"><b>AI:</b> Tell me your niche + platform and I’ll generate hooks + a short script.</p>
+          </div>
+
+          <div class="row" style="display:flex;gap:10px;margin-top:10px;">
+            <input id="chatInput" class="input" placeholder="Type a message..." />
+            <button class="btn primary" style="width:auto;white-space:nowrap" type="button" onclick="sendMessage()">Send</button>
+          </div>
+          <div class="muted2" style="font-size:12px;margin-top:8px;">
+            Backend optional: POST <b>http://localhost:8000/api/ai</b> JSON {"question":"..."}.
+          </div>
+        </div>
+      </section>
+
+      <!-- AI CREATE -->
+      <section id="create" class="page">
+        <div class="pill">🎬 AI Create</div>
+        <div class="card panel" style="margin-top:12px;">
+          <div class="panel-title">Create a video from a prompt</div>
+          <input class="input" placeholder="Describe the video you want..." />
+          <button class="btn primary" style="margin-top:10px" type="button" onclick="alert('Demo: connect to your AI generator backend')">Generate</button>
+        </div>
+      </section>
+
+      <!-- AI EDITOR -->
+      <section id="editor" class="page">
+        <div class="pill">✂️ AI Editor</div>
+        <div class="dash-grid" style="margin-top:12px;">
+          <div class="card panel">
+            <div class="panel-title">Upload footage</div>
+            <div class="placeholder"></div>
+          </div>
+          <div class="card panel">
+            <div class="panel-title">Auto edits</div>
+            <div class="placeholder"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- MY VIDEOS -->
+      <section id="videos" class="page">
+        <div class="pill">📁 My Videos</div>
+        <div class="card table-card" style="margin-top:12px;">
+          <div class="table-head">
+            <h3>Library</h3>
+            <div class="muted2">Pick one for multi-upload</div>
+          </div>
+          <table>
+            <thead>
+              <tr><th>Title</th><th>Views</th><th>Revenue</th><th>Status</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>AI Edit Trick</td><td>88k</td><td>£210</td><td><span class="status">Monetized</span></td></tr>
+              <tr><td>Caption Formula</td><td>54k</td><td>£92</td><td><span class="status">Monetized</span></td></tr>
+              <tr><td>My Workflow</td><td>12k</td><td>£11</td><td><span class="status">Monetized</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- REVENUE -->
+      <section id="revenue" class="page">
+        <div class="pill">💰 Revenue</div>
+        <div class="dash-grid" style="margin-top:12px;">
+          <div class="card panel"><div class="panel-title">Revenue breakdown</div><div class="placeholder"></div></div>
+          <div class="card panel"><div class="panel-title">Payout schedule</div><div class="placeholder"></div></div>
+        </div>
+      </section>
+
+      <!-- MULTI-UPLOAD -->
+      <section id="upload" class="page">
+        <div class="pill">⬆️ Multi-Upload</div>
+
+        <div class="upload-grid">
+          <!-- Left: choose video -->
+          <div class="card upload-box">
+            <div class="panel-title">1) Choose a video</div>
+
+            <div class="row">
+              <div class="muted2" style="font-size:12px;font-weight:900;margin-bottom:6px;">From your AIVideoHub library</div>
+              <select id="librarySelect" class="input">
+                <option value="">Select a saved video…</option>
+                <option value="AI Edit Trick">AI Edit Trick</option>
+                <option value="Caption Formula">Caption Formula</option>
+                <option value="My Workflow">My Workflow</option>
+              </select>
+            </div>
+
+            <div class="hr"></div>
+
+            <div class="row">
+              <div class="muted2" style="font-size:12px;font-weight:900;margin-bottom:6px;">Or upload from your device (PC/phone)</div>
+              <input id="fileInput" class="input" type="file" accept="video/*" />
+            </div>
+
+            <div class="row">
+              <div class="muted2" style="font-size:12px;font-weight:900;margin-bottom:6px;">Caption (optional)</div>
+              <input id="captionInput" class="input" placeholder="Write a caption…" />
+            </div>
+          </div>
+
+          <!-- Right: choose accounts -->
+          <div class="card upload-box">
+            <div class="panel-title">2) Choose account(s) to upload to</div>
+            <div class="muted2" style="font-size:12px;font-weight:900;">Select one or multiple connected accounts.</div>
+
+            <div id="uploadAccountList" class="account-list"></div>
+
+            <div class="row">
+              <button class="btn primary" type="button" onclick="startUpload()">Upload</button>
+              <div class="muted2" style="font-size:12px;margin-top:8px;">
+                (Demo only) This will validate selections and show what would upload.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ANALYTICS -->
+      <section id="analytics" class="page">
+        <div class="pill">📈 Analytics</div>
+        <div class="dash-grid" style="margin-top:12px;">
+          <div class="card panel"><div class="panel-title">Audience & retention</div><div class="placeholder"></div></div>
+          <div class="card panel"><div class="panel-title">Top sources</div><div class="placeholder"></div></div>
+        </div>
+      </section>
+
+      <!-- SUBSCRIPTION -->
+      <section id="subscription" class="page">
+        <div class="pill">💳 Subscription</div>
+        <div class="card panel" style="margin-top:12px;">
+          <div class="panel-title">Plans (demo)</div>
+          <div class="muted2">Hook up Stripe later — this is UI only.</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:12px;">
+            <div class="card" style="padding:12px;">
+              <div style="font-weight:1100;">Starter</div>
+              <div class="muted2" style="margin-top:6px;">£9 / mo</div>
+              <button class="btn" style="margin-top:10px" type="button" onclick="subscribe('Starter')">Choose</button>
+            </div>
+            <div class="card" style="padding:12px;border-color:rgba(139,92,246,0.35);">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
+                <div style="font-weight:1100;">Pro</div>
+                <span class="pill">Most popular</span>
+              </div>
+              <div class="muted2" style="margin-top:6px;">£19 / mo</div>
+              <button class="btn primary" style="margin-top:10px" type="button" onclick="subscribe('Pro')">Upgrade</button>
+            </div>
+            <div class="card" style="padding:12px;">
+              <div style="font-weight:1100;">Studio</div>
+              <div class="muted2" style="margin-top:6px;">£49 / mo</div>
+              <button class="btn" style="margin-top:10px" type="button" onclick="subscribe('Studio')">Contact</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ACCOUNTS (CONNECTED SOCIALS) -->
+      <section id="account" class="page">
+        <div class="pill">⚙️ Connected Accounts</div>
+        <div class="muted2" style="margin-top:8px;">These are the social media accounts logged in to your website.</div>
+
+        <div class="accounts-grid" id="accountsGrid"></div>
+
+        <div class="card panel" style="margin-top:12px;">
+          <div class="panel-title">Add a new account (demo)</div>
+          <div class="muted2" style="margin-bottom:10px;">In production you’d do OAuth (YouTube/TikTok/etc).</div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;">
+            <select id="newPlatform" class="input">
+              <option value="YouTube">YouTube</option>
+              <option value="TikTok">TikTok</option>
+              <option value="Instagram">Instagram</option>
+              <option value="Facebook">Facebook</option>
+            </select>
+            <input id="newHandle" class="input" placeholder="Username / channel" />
+            <button class="btn primary" type="button" onclick="addAccount()">Add</button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- LOGIN MODAL -->
+  <div id="loginModal" class="modal-backdrop hidden">
+    <div class="modal">
+      <h2>Login</h2>
+      <p>Enter an email to continue (demo session).</p>
+
+      <div style="margin-top:12px;">
+        <input id="email" class="input" type="email" placeholder="Email" aria-label="Email address" />
+      </div>
+      <div style="margin-top:10px;">
+        <input id="password" class="input" type="password" placeholder="Password" aria-label="Password" />
+      </div>
+
+      <button class="btn primary" style="margin-top:12px" type="button" onclick="login()">Continue</button>
+      <button class="btn" style="margin-top:10px" type="button" onclick="openDemo()">Enter Demo</button>
+    </div>
+  </div>
+
+  <script>
+    const loginModal = document.getElementById('loginModal');
+
+    /* ---------- NAV ---------- */
+    function navigate(pageId, el){
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active-page'));
+      const target = document.getElementById(pageId);
+      if (target) target.classList.add('active-page');
+
+      document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+      if (el) el.classList.add('active');
+
+      const main = document.querySelector('.main');
+      if (main) main.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    /* ---------- SESSION ---------- */
+    function updateUserUI(email){
+      const name = (email || 'john').split('@')[0] || 'john';
+      const display = name.charAt(0).toUpperCase() + name.slice(1);
+
+      document.getElementById('username').textContent = display;
+      document.getElementById('userTag').textContent = 'Preview';
+      document.getElementById('greeting').textContent = `Welcome back, ${display}!`;
+
+      const initials = display
+        .replace(/[^a-z0-9]+/gi, ' ')
+        .trim()
+        .split(' ')
+        .filter(Boolean)
+        .map(s => s[0].toUpperCase())
+        .join('')
+        .slice(0,2) || 'U';
+
+      document.getElementById('avatar').textContent = initials;
+    }
+
+    function login(){
+      const email = (document.getElementById('email').value || '').trim();
+      if (!email) return alert('Please enter an email to continue.');
+      localStorage.setItem('user', email);
+      updateUserUI(email);
+      loginModal.classList.add('hidden');
+    }
+
+    function openDemo(){
+      document.getElementById('email').value = 'john@aivideohub.com';
+      document.getElementById('password').value = 'demo123';
+      login();
+    }
+
+    function logout(){
+      localStorage.removeItem('user');
+      location.reload();
+    }
+
+    window.addEventListener('load', () => {
+      const user = localStorage.getItem('user');
+      if (user) {
+        updateUserUI(user);
+        loginModal.classList.add('hidden');
+      } else {
+        loginModal.classList.remove('hidden');
+      }
+      renderAccounts();
+      renderUploadAccounts();
+    });
+
+    /* ---------- CONNECTED ACCOUNTS (demo data stored in localStorage) ---------- */
+    const DEFAULT_ACCOUNTS = [
+      { id: 'yt1', platform: 'YouTube', handle: 'Spaghetticatmandan', status: 'Connected' },
+      { id: 'tt1', platform: 'TikTok', handle: 'spaghettiman', status: 'Connected' },
+      { id: 'ig1', platform: 'Instagram', handle: 'spaghetti.creator', status: 'Connected' }
+    ];
+
+    function getAccounts(){
+      const raw = localStorage.getItem('connectedAccounts');
+      if (!raw) return DEFAULT_ACCOUNTS.slice();
+      try { return JSON.parse(raw) || []; } catch { return DEFAULT_ACCOUNTS.slice(); }
+    }
+
+    function setAccounts(list){
+      localStorage.setItem('connectedAccounts', JSON.stringify(list));
+    }
+
+    function platformIcon(platform){
+      if (platform === 'YouTube') return '▶️';
+      if (platform === 'TikTok') return '🎵';
+      if (platform === 'Instagram') return '📸';
+      if (platform === 'Facebook') return '📘';
+      return '🔗';
+    }
+
+    function renderAccounts(){
+      const grid = document.getElementById('accountsGrid');
+      const accounts = getAccounts();
+      if (!grid) return;
+
+      grid.innerHTML = accounts.map(a => `
+        <div class="card acct">
+          <div class="acct-top">
+            <div class="platform">
+              <div class="plat-ico">${platformIcon(a.platform)}</div>
+              <div>
+                <div class="acct-name">${a.platform}</div>
+                <div class="acct-meta">${a.status}</div>
+              </div>
+            </div>
+            <span class="pill">@${escapeHtml(a.handle)}</span>
+          </div>
+
+          <div class="acct-actions">
+            <button class="mini purple" type="button" onclick="alert('Manage settings for ${escapeJs(a.platform)}: @${escapeJs(a.handle)} (demo)')">Manage</button>
+            <button class="mini" type="button" onclick="disconnectAccount('${escapeJs(a.id)}')">Disconnect</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function addAccount(){
+      const platform = document.getElementById('newPlatform').value;
+      const handle = (document.getElementById('newHandle').value || '').trim();
+      if (!handle) return alert('Please enter a username/channel name.');
+
+      const accounts = getAccounts();
+      const id = platform.toLowerCase().slice(0,2) + Date.now();
+      accounts.unshift({ id, platform, handle, status: 'Connected' });
+      setAccounts(accounts);
+
+      document.getElementById('newHandle').value = '';
+      renderAccounts();
+      renderUploadAccounts();
+    }
+
+    function disconnectAccount(id){
+      const accounts = getAccounts().filter(a => a.id !== id);
+      setAccounts(accounts);
+      renderAccounts();
+      renderUploadAccounts();
+    }
+
+    /* ---------- MULTI-UPLOAD ACCOUNT SELECT ---------- */
+    function renderUploadAccounts(){
+      const wrap = document.getElementById('uploadAccountList');
+      if (!wrap) return;
+
+      const accounts = getAccounts();
+      if (accounts.length === 0){
+        wrap.innerHTML = `<div class="muted2" style="margin-top:10px;">No accounts connected. Go to <b>Accounts</b> and add one.</div>`;
+        return;
+      }
+
+      wrap.innerHTML = accounts.map(a => `
+        <label class="account-item">
+          <div class="left">
+            <span class="acct-pill">${platformIcon(a.platform)} ${escapeHtml(a.platform)}</span>
+            <span class="acct-user">@${escapeHtml(a.handle)}</span>
+          </div>
+          <input type="checkbox" class="acctCheck" value="${escapeHtml(a.id)}" />
+        </label>
+      `).join('');
+    }
+
+    function startUpload(){
+      const libraryChoice = document.getElementById('librarySelect').value;
+      const file = document.getElementById('fileInput').files[0];
+      const caption = (document.getElementById('captionInput').value || '').trim();
+
+      // Video selection validation
+      if (!libraryChoice && !file){
+        return alert('Please choose a video from your library OR upload a video file.');
+      }
+
+      // Account selection validation
+      const checks = Array.from(document.querySelectorAll('.acctCheck')).filter(c => c.checked);
+      if (checks.length === 0){
+        return alert('Please select at least one account to upload to.');
+      }
+
+      const accounts = getAccounts();
+      const selectedAccounts = checks.map(c => accounts.find(a => a.id === c.value)).filter(Boolean);
+
+      const videoName = libraryChoice ? `Library video: "${libraryChoice}"` : `File: "${file.name}"`;
+      const targets = selectedAccounts.map(a => `${a.platform} (@${a.handle})`).join(', ');
+
+      alert(
+        `✅ Demo upload\n\n${videoName}\nTo: ${targets}\n` + (caption ? `Caption: ${caption}\n` : '')
+        + `\n(Replace this with real upload API calls.)`
+      );
+    }
+
+    /* ---------- AI CHAT (mock + backend fallback) ---------- */
+    async function sendMessage(){
+      const input = document.getElementById('chatInput');
+      const chatBox = document.getElementById('chatBox');
+      if (!input || !chatBox) return;
+
+      const text = (input.value || '').trim();
+      if (!text) return;
+
+      chatBox.innerHTML += `<p><b>You:</b> ${escapeHtml(text)}</p>`;
+      input.value = '';
+
+      try{
+        const resp = await fetch('http://localhost:8000/api/ai', {
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ question: text })
+        });
+        const json = await resp.json();
+        const ans = json.answer || json.error || '(No response)';
+        chatBox.innerHTML += `<p class="muted"><b>AI:</b> ${escapeHtml(ans)}</p>`;
+      }catch(e){
+        chatBox.innerHTML += `<p class="muted"><b>AI:</b> ${escapeHtml(mockAI(text))}</p>`;
+      }
+
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function mockAI(text){
+      const t = text.toLowerCase();
+      if (t.includes('hook')) return "Hooks: 1) Stop scrolling… 2) I used to do this wrong… 3) 3 mistakes creators make… 4) Do this for 7 days… 5) The fastest way to improve…";
+      if (t.includes('script')) return "Script: Hook (0–2s) → Promise (2–4s) → Steps (4–25s) → Recap (25–28s) → CTA (28–30s).";
+      return "Tell me your niche + platform + goal and I’ll generate hooks + a short script.";
+    }
+
+    function escapeHtml(str){
+      return String(str).replace(/[&<>"']/g, s => ({
+        '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+      }[s]));
+    }
+    function escapeJs(str){
+      return String(str).replace(/['"\\]/g, '\\$&');
+    }
+
+    function subscribe(plan){
+      alert(`Mock checkout: ${plan}. Replace with Stripe later.`);
+    }
+  </script>
+</body>
+</html>
